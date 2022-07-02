@@ -1,7 +1,7 @@
 const Login = () => {
-	return ( <div className="signup">
+	return ( <div className="login">
 		<h2>login</h2>
-		<form action="http://localhost:5000/api/user/sign-up" method="POST">
+		<form action="http://localhost:5000/api/user/log-in" method="POST">
 			<label htmlFor="username">Username</label>
 			<input type="text" id="username" name="username"/>
 			<label htmlFor="">Password</label>

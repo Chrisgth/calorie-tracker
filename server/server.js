@@ -56,36 +56,9 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// server.use('/api/user', userRoutes)
-
 server.use(function(req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
 
-server.post('/api/user/sign-up', (req, res, next) => {
-	bcryptjs.hash(req.body.password, 10, (err, hashedPassword) => {
-		if (err) {
-			console.log(err)
-		} else {
-			const user = new User ({
-				username: req.body.username,
-				password: hashedPassword
-			}).save(err => {
-				if (err) {
-					return next(err)
-				}
-				res.redirect('http://localhost:3000/log-in')
-			})
-		}
-	})
-})
-
-server.post(
-  "/api/user/log-in",
-  passport.authenticate("local", {
-    successRedirect: "http://localhost:3000/",
-    failureRedirect: "http://localhost:3000/log-in"
-  })
-);
-
+server.use('/api/user', userRoutes)
