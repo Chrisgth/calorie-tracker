@@ -28,16 +28,26 @@ const signup = asyncHandler(async(req, res) => {
 
 	user.save()
 		.then((response) => {
-			res.status(201).redirect('http://localhost:3000/')
+			res.status(201).redirect('http://localhost:3000/log-in')
 		})
-		.catch(err => console.log(err))
+		.catch((err) => {
+			res.status(400)
+			throw new Error('Invalid data')
+		})
 });
 
-const login = passport.authenticate("local", {
-    successRedirect: "http://localhost:3000/",
-    failureRedirect: "http://localhost:3000/log-in",
-  })
+const login = asyncHandler(async (req, res) => {
+	const {username, password} = req.body
 
+	const user = await User.findOne({username})
+
+	if(user && (await bcryptjs.compare(password, user.password))){
+		res.redirect('http://localhost:3000/')
+	} else {
+		res.status(400)
+		throw new Error('Invalid credentials')
+	}
+})
 const profile = (req, res) => {
 	res.json({message:'hellolads'})
 }
