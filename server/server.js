@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const bcryptjs = require('bcryptjs');
 const User = require('./models/user.js')
 const userRoutes = require('./routes/users.js')
+const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const server = express()

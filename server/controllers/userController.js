@@ -25,7 +25,12 @@ const login = passport.authenticate("local", {
     failureRedirect: "http://localhost:3000/log-in",
   })
 
+const profile = (req, res) => {
+	res.json(req.user)
+}
+
 module.exports = {
 	signup,
-	login
+	login,
+	profile
 }
