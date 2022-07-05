@@ -2,6 +2,7 @@ const passport = require("passport");
 const bcryptjs = require('bcryptjs');
 const User = require('../models/user.js');
 const asyncHandler = require('express-async-handler')
+const jwt = require('jsonwebtoken')
 
 const signup = asyncHandler(async(req, res) => {
 	const { username, password } = req.body
@@ -28,11 +29,15 @@ const signup = asyncHandler(async(req, res) => {
 
 	user.save()
 		.then((response) => {
-			res.status(201).redirect('http://localhost:3000/log-in')
+			res.status(201).json({
+				_id: user.id,
+				username: user.username,
+				token: generateToken(user._id)
+			})
 		})
 		.catch((err) => {
 			res.status(400)
-			throw new Error('Invalid data')
+			throw new Error(err)
 		})
 });
 
@@ -42,7 +47,11 @@ const login = asyncHandler(async (req, res) => {
 	const user = await User.findOne({username})
 
 	if(user && (await bcryptjs.compare(password, user.password))){
-		res.redirect('http://localhost:3000/')
+		res.json({
+			_id: user.id,
+			username: user.username,
+			token: generateToken(user._id)
+		})
 	} else {
 		res.status(400)
 		throw new Error('Invalid credentials')
@@ -50,6 +59,12 @@ const login = asyncHandler(async (req, res) => {
 })
 const profile = (req, res) => {
 	res.json({message:'hellolads'})
+}
+
+const generateToken = (id) => {
+	return jwt.sign({ id }, process.env.JWT_SECRET, {
+		expiresIn: '7d'
+	})
 }
 
 module.exports = {
