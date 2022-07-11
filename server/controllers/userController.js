@@ -58,7 +58,11 @@ const login = asyncHandler(async (req, res) => {
 	}
 })
 const profile = (req, res) => {
-	res.json({message:'hellolads'})
+	const user = req.user
+
+	res.status(200).json({
+		user
+	})
 }
 
 const generateToken = (id) => {
