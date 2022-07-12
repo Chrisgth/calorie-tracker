@@ -11,3 +11,92 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #2b2d42;
+  text-align: center;
+}
+
+.navbar > div {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar > div > a {
+  text-decoration: none;
+  color: #edf2f4;
+  margin: auto;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin: 0;
+  color: #edf2f4;
+  text-decoration: none;
+}
+
+.login, .signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginform, .signupform {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.loginform > button, .signupform > button {
+  background-color: white;
+  color: #2b2d42;
+  border: 4px solid #2b2d42;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bolder;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.loginform > div > input, .signupform > div > input {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.footer {
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  background-color: #2b2d42;
+  color: #edf2f4;
+}
+
+p > a {
+  color: #edf2f4;
+  
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+}

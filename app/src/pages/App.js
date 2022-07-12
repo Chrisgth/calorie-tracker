@@ -3,6 +3,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard'
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 
 function App() {
   return (
@@ -10,10 +11,11 @@ function App() {
       <div className="App">
         <Nav />
         <Routes>
-          <Route path='/' element={<Dashboard />}/>
           <Route path='/sign-up' element={<Signup />}/>
           <Route path='/log-in' element={<Login />}/>
+          <Route path='/dashboard' element={<Dashboard />}/>
         </Routes>
+        <Footer />
       </div>  
     </Router>
   )

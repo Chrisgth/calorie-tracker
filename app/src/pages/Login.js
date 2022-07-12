@@ -10,12 +10,17 @@ const Login = () => {
 			.catch(err => console.log(err))
 	}
 	return ( <div className="login">
-		<h2>login</h2>
-		<form action="http://localhost:5000/api/user/log-in" method="POST">
-			<label htmlFor="username">Username</label>
-			<input type="text" id="username" name="username" required/>
-			<label htmlFor="">Password</label>
-			<input type="password" id="password" name="password" required/>
+		<h2>Welcome back to Caltrack!</h2>
+		<h3>Please log in</h3>
+		<form className="loginform">
+			<div>
+				<label htmlFor="username">Username</label>
+				<input type="text" id="username" name="username" required/>
+			</div>
+			<div>
+				<label htmlFor="">Password</label>
+				<input type="password" id="password" name="password" required/>
+			</div>
 			<button onClick={clickHandler}>Submit</button>
 		</form>
 		<p>Don't have an account?</p>
