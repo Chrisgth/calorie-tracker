@@ -1,4 +1,3 @@
-const passport = require("passport");
 const bcryptjs = require('bcryptjs');
 const User = require('../models/user.js');
 const asyncHandler = require('express-async-handler')
@@ -60,6 +59,7 @@ const login = asyncHandler(async (req, res) => {
 const profile = (req, res) => {
 	const user = req.user
 
+	res.set('Access-Control-Allow-Origin', 'http://localhost:3000')
 	res.status(200).json({
 		user
 	})

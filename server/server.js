@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require('./routes/users.js')
+const trackerRoutes = require('./routes/tracker.js')
 require('dotenv').config()
 
 const server = express()
@@ -15,4 +16,5 @@ mongoose
 
 server.use(express.urlencoded({ extended: false }));
 
-server.use('/api/user', userRoutes)
+server.use('/api/user', userRoutes);
+server.use('/api/tracker', trackerRoutes);
