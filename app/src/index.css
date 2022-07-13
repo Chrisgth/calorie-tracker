@@ -107,3 +107,13 @@ form > div {
   display: flex;
   flex-direction: column;
 }
+
+.logout {
+  text-decoration: none;
+  color: #edf2f4;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
+}

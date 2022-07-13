@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 const axios = require("axios").default;
 
-const Login = ({ setUser, user }) => {
+const Login = ({ setUser }) => {
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -18,8 +18,14 @@ const Login = ({ setUser, user }) => {
   };
 
   const clickHandler = (e) => {
+    const form = document.querySelector(".loginform");
+
     e.preventDefault();
-    console.log(data);
+    if (form.checkValidity() === false) {
+      form.reportValidity();
+      return;
+    }
+
     axios
       .post("http://localhost:5000/api/user/log-in", data)
       .then((response) => {

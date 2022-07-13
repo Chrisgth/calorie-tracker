@@ -26,7 +26,16 @@ function App() {
         <Nav user={user} setUser={setUser} />
         <div className="content">
           <Routes>
-            <Route path="/sign-up" element={<Signup />} />
+            <Route
+              path="/sign-up"
+              element={
+                user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Signup setUser={setUser} user={user} />
+                )
+              }
+            />
             <Route
               path="/log-in"
               element={
