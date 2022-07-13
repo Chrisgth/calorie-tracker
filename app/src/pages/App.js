@@ -14,23 +14,33 @@ import { useEffect, useState } from "react";
 function App() {
   const [user, setUser] = useState();
 
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
+
   useEffect(() => {}, [user]);
 
   return (
     <Router>
       <div className="App">
-        <Nav user={user} />
+        <Nav user={user} setUser={setUser} />
         <div className="content">
           <Routes>
             <Route path="/sign-up" element={<Signup />} />
             <Route
               path="/log-in"
-              element={<Login setUser={setUser} user={user} />}
+              element={
+                user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Login setUser={setUser} user={user} />
+                )
+              }
             />
             <Route
               path="/"
               element={
-                user === null ? <Navigate to="/log-in" /> : <Dashboard />
+                !user ? <Navigate to="/log-in" /> : <Dashboard user={user} />
               }
             />
           </Routes>

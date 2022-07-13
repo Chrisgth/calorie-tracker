@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 
-const Nav = ({ user }) => {
+const Nav = ({ user, setUser }) => {
+  const logout = () => {
+    setUser();
+    localStorage.clear();
+  };
   return (
     <div className="navbar">
       <Link to="/" className="logo">
         Caltrack
       </Link>
-      {user && <button>Log out</button>}
+      {user && <button onClick={logout}>Log out</button>}
       {!user && (
         <div>
           <Link to="/log-in">Log In</Link>
