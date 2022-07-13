@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 const axios = require("axios").default;
 
-const Login = () => {
+const Login = ({ setUser, user }) => {
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -15,7 +15,6 @@ const Login = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(data);
   };
 
   const clickHandler = (e) => {
@@ -24,10 +23,12 @@ const Login = () => {
     axios
       .post("http://localhost:5000/api/user/log-in", data)
       .then((response) => {
-        console.log(response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data));
+        setUser(response.data);
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <div className="login">
       <h2>Welcome back to Caltrack!</h2>
