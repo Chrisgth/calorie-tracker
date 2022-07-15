@@ -36,81 +36,93 @@ const Signup = ({ setUser }) => {
       return;
     }
 
+    setLoading(true);
+
     axios
       .post("http://localhost:5000/api/user/sign-up", data)
       .then((response) => {
         if (response.status === 201) {
           navigate("/log-in", { replace: true });
         }
+        setLoading(false);
+        setError(false);
       })
       .catch((err) => {
-        console.log(err.request.status);
+        setLoading(false);
+        setError(err.request.status);
       });
   };
 
   return (
     <div className="signup">
       <h2>Sign up</h2>
-      <form className="signupform" onSubmit={handleSubmit(clickHandler)}>
-        <div>
-          <input
-            type="text"
-            id="username"
-            {...register("username", {
-              required: "This field is required",
-              minLength: {
-                value: 5,
-                message: "Minimum length is 5 characters",
-              },
-              maxLength: {
-                value: 15,
-                message: "Maximum length is 15 characters",
-              },
-            })}
-            placeholder="Username"
-            value={username}
-            onChange={onChange}
-          />
-          <p>{errors.username?.message}</p>
-        </div>
-        <div>
-          <input
-            type="password"
-            id="password"
-            {...register("password", {
-              required: "This field is required",
-              minLength: {
-                value: 8,
-                message: "Minimum length is 8 characters",
-              },
-              maxLength: {
-                value: 30,
-                message: "Maximum length is 30 characters",
-              },
-            })}
-            placeholder="Password"
-            value={password}
-            onChange={onChange}
-          />
-          <p>{errors.password?.message}</p>
-        </div>
-        <div>
-          <input
-            type="password"
-            id="password2"
-            {...register("password2", {
-              required: "This field is required",
-              validate: (value) =>
-                value === watch("password") || "Passwords do not match",
-            })}
-            placeholder="Confirm Password"
-            value={password2}
-            onChange={onChange}
-          />
-          <p>{errors.password2?.message}</p>
-        </div>
-        <button>Submit</button>
-      </form>
+      {loading && <div>Loading...</div>}
+      {loading === false && (
+        <form className="signupform" onSubmit={handleSubmit(clickHandler)}>
+          <div>
+            <input
+              type="text"
+              id="username"
+              {...register("username", {
+                required: "This field is required",
+                minLength: {
+                  value: 5,
+                  message: "Minimum length is 5 characters",
+                },
+                maxLength: {
+                  value: 15,
+                  message: "Maximum length is 15 characters",
+                },
+              })}
+              placeholder="Username"
+              value={username}
+              onChange={onChange}
+              className={`${errors.username ? "errorborder" : ""}`}
+            />
+            <p>{errors.username?.message}</p>
+          </div>
+          <div>
+            <input
+              type="password"
+              id="password"
+              {...register("password", {
+                required: "This field is required",
+                minLength: {
+                  value: 8,
+                  message: "Minimum length is 8 characters",
+                },
+                maxLength: {
+                  value: 30,
+                  message: "Maximum length is 30 characters",
+                },
+              })}
+              placeholder="Password"
+              value={password}
+              onChange={onChange}
+              className={`${errors.password ? "errorborder" : ""}`}
+            />
+            <p>{errors.password?.message}</p>
+          </div>
+          <div>
+            <input
+              type="password"
+              id="password2"
+              {...register("password2", {
+                required: "This field is required",
+                validate: (value) =>
+                  value === watch("password") || "Passwords do not match",
+              })}
+              placeholder="Confirm Password"
+              value={password2}
+              onChange={onChange}
+              className={`${errors.password2 ? "errorborder" : ""}`}
+            />
+            <p>{errors.password2?.message}</p>
+          </div>
+          <button>Submit</button>
+          {error === 400 && <p className="error">User already exists</p>}
+        </form>
+      )}
       <p>Already have an account?</p>
       <Link to="/log-in">Log in</Link>
     </div>
