@@ -11,6 +11,11 @@ const signup = asyncHandler(async (req, res) => {
     throw new Error("Please fill out all the fields");
   }
 
+  if (username.length > 15 || password.length > 30) {
+    res.status(400);
+    throw new Error("Inputs do not pass validation");
+  }
+
   const userExists = await User.findOne({ username });
 
   if (userExists) {
