@@ -1,15 +1,25 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const Signup = ({ setUser }) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [data, setData] = useState({
     username: "",
     password: "",
+    password2: "",
   });
 
-  const { username, password } = data;
+  const { username, password, password2 } = data;
 
   const onChange = (e) => {
     setData((prevState) => ({
@@ -18,16 +28,16 @@ const Signup = ({ setUser }) => {
     }));
   };
 
+  console.log(errors);
+
   const clickHandler = (e) => {
     const form = document.querySelector(".signupform");
 
-    e.preventDefault();
     if (form.checkValidity() === false) {
       form.reportValidity();
       return;
     }
 
-    console.log(data);
     axios
       .post("http://localhost:5000/api/user/sign-up", data)
       .then((response) => {
@@ -35,36 +45,55 @@ const Signup = ({ setUser }) => {
           navigate("/log-in", { replace: true });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err.request.status);
+      });
   };
 
   return (
     <div className="signup">
       <h2>Sign up</h2>
-      <form className="signupform">
+      <form className="signupform" onSubmit={handleSubmit(clickHandler)}>
         <div>
           <input
             type="text"
             id="username"
-            name="username"
+            {...register("username", {
+              required: "This field is required",
+              minLength: {
+                value: 5,
+                message: "Minimum length is 5 characters",
+              },
+            })}
             placeholder="Username"
             value={username}
             onChange={onChange}
-            required
           />
+          <p>{errors.username?.message}</p>
         </div>
         <div>
           <input
             type="password"
             id="password"
-            name="password"
+            {...register("password", { required: "This field is required" })}
             placeholder="Password"
             value={password}
             onChange={onChange}
-            required
           />
+          <p>{errors.password?.message}</p>
         </div>
-        <button onClick={clickHandler}>Submit</button>
+        <div>
+          <input
+            type="password"
+            id="password2"
+            {...register("password2", { required: "This field is required" })}
+            placeholder="Confirm Password"
+            value={password2}
+            onChange={onChange}
+          />
+          <p>{errors.password2?.message}</p>
+        </div>
+        <button>Submit</button>
       </form>
       <p>Already have an account?</p>
       <Link to="/log-in">Log in</Link>
