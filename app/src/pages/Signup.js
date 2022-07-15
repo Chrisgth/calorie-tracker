@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import LoadingSpinner from "../components/Spinner";
 
 const Signup = ({ setUser }) => {
   const {
@@ -56,7 +57,7 @@ const Signup = ({ setUser }) => {
   return (
     <div className="signup">
       <h2>Sign up</h2>
-      {loading && <div>Loading...</div>}
+      {loading && <LoadingSpinner />}
       {loading === false && (
         <form className="signupform" onSubmit={handleSubmit(clickHandler)}>
           <div>

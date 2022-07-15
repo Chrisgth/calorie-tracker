@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../components/Spinner";
 const axios = require("axios").default;
 
 const Login = ({ setUser }) => {
@@ -55,7 +56,7 @@ const Login = ({ setUser }) => {
     <div className="login">
       <h2>Welcome back to Caltrack!</h2>
       <h3>Please log in</h3>
-      {loading && <p className="loading">Loading...</p>}
+      {loading && <LoadingSpinner />}
       {loading === false && (
         <form className="loginform" onSubmit={handleSubmit(clickHandler)}>
           <div>
