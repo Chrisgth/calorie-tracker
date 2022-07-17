@@ -1,3 +1,4 @@
+import Search from "../images/loupe.png";
 const Dashboard = ({ user }) => {
   const trackuser = () => {
     console.log(user);
@@ -6,7 +7,8 @@ const Dashboard = ({ user }) => {
     <div className="dashboard">
       <div className="sidebar"></div>
       <div className="searchbar">
-        <input type="search" />
+        <img src={Search} alt="" />
+        <input type="text" placeholder="Search for food here..." />
       </div>
       <div className="display"></div>
     </div>

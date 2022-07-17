@@ -133,13 +133,15 @@ form > div > p,
 }
 
 .dashboard {
-  height: 100%;
   display: grid;
+  height: 100%;
   grid-template: 1fr 14fr/ 1fr 4fr;
 }
 
 .dashboard > * {
   border: 2px solid black;
+  margin: 4px;
+  border-radius: 10px;
 }
 
 .sidebar {
@@ -148,14 +150,31 @@ form > div > p,
 }
 
 .searchbar {
-  background: black;
+  background: #c57b57;
   color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .searchbar > input {
   width: 100%;
-  height: 100%;
-  background-color: black;
-  color: white;
+  height: 80%;
+  background-color: #c57b57;
   border: none;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+.searchbar > img {
+  height: 40%;
+}
+
+.searchbar > input:focus {
+  outline: none;
+}
+
+.searchbar > input::placeholder {
+  color: black;
+  opacity: 0.5;
 }
