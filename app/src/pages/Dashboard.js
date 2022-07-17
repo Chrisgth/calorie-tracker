@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingSpinner from "../components/Spinner";
 import Search from "../images/loupe.png";
 const Dashboard = ({ user }) => {
@@ -20,9 +20,32 @@ const Dashboard = ({ user }) => {
 
   const [searchbar, setSearchBar] = useState(false);
   const [searchQuery, setSearchQuery] = useState();
-  const trackuser = () => {
-    console.log(user);
+  const [result, setResult] = useState();
+  const [typingTimeOut, setTypingTimeOut] = useState();
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      searchFoods();
+    }, 1000);
+
+    return () => {
+      clearTimeout(t);
+    };
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (result?.data.parsed.length === 0) {
+      console.log("refine your search");
+    } else {
+      console.log(result);
+    }
+  }, [result]);
+
+  const searchFoods = async () => {
+    const searchResult = await getFood(searchQuery);
+    setResult(searchResult);
   };
+
   const changeHandler = (e) => {
     const input = document.getElementById("searchbox");
     if (input.value === "") {
