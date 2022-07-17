@@ -136,12 +136,12 @@ form > div > p,
   display: grid;
   height: 100%;
   grid-template: 1fr 14fr/ 1fr 4fr;
+  gap: 8px;
 }
 
 .dashboard > * {
-  border: 2px solid black;
-  margin: 4px;
   border-radius: 10px;
+  border: 2px solid black;
 }
 
 .sidebar {
@@ -157,6 +157,7 @@ form > div > p,
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
+  border-radius: 10px 10px 0 0;
 }
 
 .search {
@@ -190,7 +191,10 @@ form > div > p,
   position: absolute;
   background-color: #c57b57;
   color: red;
-  top: 50px;
-  border-radius: 10px;
-  border: 2px solid black;
+  top: 101%;
+  border-radius: 0 0 10px 10px;
+  outline: 2px solid black;
+  height: 100%;
+  /* width: calc(100% - 4px); */
+  width: 100%;
 }

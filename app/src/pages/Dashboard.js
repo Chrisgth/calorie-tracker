@@ -29,15 +29,7 @@ const Dashboard = ({ user }) => {
         </div>
         {searchbar && (
           <div className="dropdown">
-            <ul>
-              <li>A</li>
-              <li>A</li>
-              <li>A</li>
-              <li>A</li>
-              <li>A</li>
-              <li>A</li>
-              <li>A</li>
-            </ul>
+            <p>this is the searchbar dropdown</p>
           </div>
         )}
       </div>
