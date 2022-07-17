@@ -152,29 +152,45 @@ form > div > p,
 .searchbar {
   background: #c57b57;
   color: white;
-  display: flex;
+  display: grid;
   align-items: center;
   padding-left: 1rem;
   padding-right: 1rem;
+  position: relative;
 }
 
-.searchbar > input {
+.search {
+  display: flex;
+  align-items: center;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.search > input {
   width: 100%;
   height: 80%;
   background-color: #c57b57;
   border: none;
   font-size: 1rem;
   margin-left: 1rem;
-}
-.searchbar > img {
-  height: 40%;
+  border-bottom: 2px solid black;
+  padding-bottom: 0.5rem;
 }
 
-.searchbar > input:focus {
+.search > input:focus {
   outline: none;
 }
 
-.searchbar > input::placeholder {
+.search > input::placeholder {
   color: black;
   opacity: 0.5;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: #c57b57;
+  color: red;
+  top: 50px;
+  border-radius: 10px;
+  border: 2px solid black;
 }
