@@ -2,11 +2,13 @@ const Dashboard = ({ user }) => {
   const trackuser = () => {
     console.log(user);
   };
-
   return (
     <div className="dashboard">
-      {user && <p>Welcome back {user.username}</p>}
-      <button onClick={trackuser}>trackuser</button>
+      <div className="sidebar"></div>
+      <div className="searchbar">
+        <input type="search" />
+      </div>
+      <div className="display"></div>
     </div>
   );
 };
