@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import LoadingSpinner from "../components/Spinner";
 import Search from "../images/loupe.png";
 const Dashboard = ({ user }) => {
   const getFood = async (food) => {
@@ -47,7 +48,7 @@ const Dashboard = ({ user }) => {
         </div>
         {searchbar && (
           <div className="dropdown">
-            <p>this is the searchbar dropdown</p>
+            <LoadingSpinner />
           </div>
         )}
       </div>

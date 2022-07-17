@@ -194,7 +194,13 @@ form > div > p,
   top: 101%;
   border-radius: 0 0 10px 10px;
   outline: 2px solid black;
-  height: 100%;
+  min-height: 100%;
   /* width: calc(100% - 4px); */
   width: 100%;
+}
+
+.dropdown > .spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
