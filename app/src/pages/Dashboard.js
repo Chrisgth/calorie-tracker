@@ -1,23 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "../components/Spinner";
 import Search from "../images/loupe.png";
+import Results from "../components/Results";
+import { getFood } from "../services/getFood";
 const Dashboard = ({ user }) => {
-  const getFood = async (food) => {
-    const response = await axios.get(
-      "https://api.edamam.com/api/food-database/v2/parser",
-      {
-        params: {
-          app_id: process.env.REACT_APP_APP_ID,
-          app_key: process.env.REACT_APP_APP_KEY,
-          ingr: food,
-        },
-      }
-    );
-
-    return response;
-  };
-
   const [searchbar, setSearchBar] = useState(false);
   const [searchQuery, setSearchQuery] = useState();
   const [result, setResult] = useState();
@@ -71,7 +57,8 @@ const Dashboard = ({ user }) => {
         </div>
         {searchbar && (
           <div className="dropdown">
-            <LoadingSpinner />
+            {!result && <LoadingSpinner />}
+            {result && <Results result={result} />}
           </div>
         )}
       </div>
