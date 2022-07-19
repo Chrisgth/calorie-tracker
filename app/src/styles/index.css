@@ -151,7 +151,6 @@ form > div > p,
 
 .searchbar {
   background: #c57b57;
-  color: white;
   display: grid;
   align-items: center;
   padding-left: 1rem;
@@ -189,8 +188,7 @@ form > div > p,
 
 .dropdown {
   position: absolute;
-  background-color: #c57b57;
-  color: red;
+  background-color: #f7dba7;
   top: 101%;
   border-radius: 0 0 10px 10px;
   outline: 2px solid black;
@@ -203,4 +201,76 @@ form > div > p,
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.hints {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  margin: 1rem;
+  gap: 1rem;
+}
+
+.mainresult {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+}
+.mainresult > p {
+  font-weight: bolder;
+}
+.hint {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.hint > button {
+  justify-self: flex-end;
+}
+
+.mainresult > img,
+.hint > img {
+  max-width: 50px;
+  min-width: 50px;
+  height: auto;
+  border: 4px solid #c57b57;
+  border-radius: 4px;
+}
+
+.mainresult > button,
+.hint > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+}
+.mainresult > button:hover,
+.hint > button:hover {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 50%;
+}
+
+.mainresult:hover,
+.hint:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.mainresult:hover > p,
+.hint:hover > p {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.refine {
+  font-weight: bolder;
+  padding: 1rem;
+  margin: 1rem;
 }
