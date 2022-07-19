@@ -9,7 +9,7 @@ import Downarrow from "../images/down-arrow.png";
 import Close from "../images/close.png";
 const Dashboard = ({ user }) => {
   const [searchbar, setSearchBar] = useState(false);
-  const [searchQuery, setSearchQuery] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
   const [result, setResult] = useState();
   const [displayItem, setDisplayItem] = useState();
   const [displayType, setDisplayType] = useState();
@@ -19,7 +19,6 @@ const Dashboard = ({ user }) => {
   useEffect(() => {
     const t = setTimeout(() => {
       searchFoods();
-      console.log("search timeout");
     }, 1000);
 
     if (searchQuery === "") {
