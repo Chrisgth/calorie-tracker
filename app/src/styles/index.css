@@ -165,6 +165,10 @@ form > div > p,
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
+.search > img {
+  height: 24px;
+  width: 24px;
+}
 
 .search > input {
   width: 100%;
@@ -173,6 +177,7 @@ form > div > p,
   border: none;
   font-size: 1rem;
   margin-left: 1rem;
+  margin-right: 1rem;
   border-bottom: 2px solid black;
   padding-bottom: 0.5rem;
 }
@@ -192,7 +197,7 @@ form > div > p,
   top: 101%;
   border-radius: 0 0 10px 10px;
   outline: 2px solid black;
-  min-height: 100%;
+  min-height: 40px;
   /* width: calc(100% - 4px); */
   width: 100%;
 }
@@ -273,4 +278,31 @@ form > div > p,
   font-weight: bolder;
   padding: 1rem;
   margin: 1rem;
+}
+
+.searchHide {
+  width: 100%;
+  background: none;
+  font-size: 1.5rem;
+  border-radius: 4px;
+  border: none;
+}
+
+#show,
+#hide {
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+#show:hover,
+#hide:hover {
+  background-color: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+#close {
+  cursor: pointer;
+  padding: 8px;
 }

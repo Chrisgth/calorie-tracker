@@ -6,6 +6,7 @@ const Results = ({
   setDisplayItem,
   setResult,
   setSearchBar,
+  setSearchQuery,
 }) => {
   let parsedResult;
   let hintArray;
@@ -21,6 +22,7 @@ const Results = ({
     setDisplayItem(arrItem);
     setResult();
     setSearchBar();
+    setSearchQuery("");
     console.log(arrItem);
   };
 
