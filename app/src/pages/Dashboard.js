@@ -67,6 +67,7 @@ const Dashboard = ({ user }) => {
             placeholder="Search for food here..."
             onChange={changeHandler}
             value={searchQuery}
+            autoComplete="off"
           />
           <img
             src={Close}

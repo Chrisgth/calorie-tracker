@@ -34,7 +34,7 @@ const Results = ({
         <div className="mainresult">
           <img src={parsedResult.image} alt="main result" />
           <p
-            onClick={() => clickHandler(parsedResult)}
+            onClick={() => clickHandler(result.data.hints[0])}
             className={"clickableItemText"}
           >
             {parsedResult.label}
@@ -53,7 +53,7 @@ const Results = ({
                 ></img>
               }
               <p
-                onClick={() => clickHandler(hint.food)}
+                onClick={() => clickHandler(hint)}
                 className={"clickableItemText"}
               >
                 {hint.food.label}{" "}
