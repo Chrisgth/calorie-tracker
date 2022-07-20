@@ -19,7 +19,7 @@ const Dashboard = ({ user }) => {
   useEffect(() => {
     const t = setTimeout(() => {
       searchFoods();
-    }, 1000);
+    }, 500);
 
     if (searchQuery === "") {
       setSearchBar(false);
