@@ -48,7 +48,7 @@ const signup = asyncHandler(async (req, res) => {
 
 const login = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-
+  console.log(username, password);
   const user = await User.findOne({ username });
 
   console.log(req.body);

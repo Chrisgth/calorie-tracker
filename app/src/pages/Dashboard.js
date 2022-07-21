@@ -7,6 +7,7 @@ import Item from "../components/Item";
 import Uparrow from "../images/up-arrow.png";
 import Downarrow from "../images/down-arrow.png";
 import Close from "../images/close.png";
+import axios from "axios";
 const Dashboard = ({ user }) => {
   const [searchbar, setSearchBar] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,9 +56,23 @@ const Dashboard = ({ user }) => {
     setSearchQuery(e.target.value);
   };
 
+  const config = {
+    headers: { Authorization: `Bearer ${user.token}` },
+  };
+
+  const auth = () => {
+    axios
+      .get("http://localhost:5000/api/user/profile", config)
+      .then((res) => console.log(res));
+  };
+
+  console.log(user);
+
   return (
     <div className="dashboard">
-      <div className="sidebar"></div>
+      <div className="sidebar">
+        <button onClick={auth}>Auth request</button>
+      </div>
       <div className="searchbar">
         <div className="search">
           <img src={Search} alt="" />
