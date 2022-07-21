@@ -23,6 +23,12 @@ const Item = ({ displayItem }) => {
     );
     setWeight(Math.round(input * measurement[0].weight));
   }, [select, input]);
+
+  const counter = (number) => {
+    const result = Number.parseFloat((number / 100) * weight).toFixed(2);
+    console.log(result);
+    return result;
+  };
   const data = {
     labels: ["Carbs", "Fat", "Protein"],
     datasets: [
@@ -63,7 +69,6 @@ const Item = ({ displayItem }) => {
                   </option>
                 ))}
               </select>
-              <p>{weight}</p>
             </div>
           </div>
           <div className="nutrition">
@@ -72,25 +77,25 @@ const Item = ({ displayItem }) => {
               <br />
               <div>
                 <p>Calories</p>
-                <p>{displayItem.food.nutrients.ENERC_KCAL}</p>
+                <p>{counter(displayItem.food.nutrients.ENERC_KCAL)}</p>
               </div>
               <br />
               <div>
                 <p>Carbs</p>
-                <p>{displayItem.food.nutrients.CHOCDF}g</p>
+                <p>{counter(displayItem.food.nutrients.CHOCDF)}g</p>
               </div>
               <div>
                 <p>Fat</p>
-                <p>{displayItem.food.nutrients.FAT}g</p>
+                <p>{counter(displayItem.food.nutrients.FAT)}g</p>
               </div>
               <div>
                 <p>Protein</p>
-                <p>{displayItem.food.nutrients.PROCNT}g</p>
+                <p>{counter(displayItem.food.nutrients.PROCNT)}g</p>
               </div>
               <br />
               <div>
                 <p>Fiber</p>
-                <p>{displayItem.food.nutrients.FIBTG}g</p>
+                <p>{counter(displayItem.food.nutrients.FIBTG)}g</p>
               </div>
             </div>
             <div className="chart">
