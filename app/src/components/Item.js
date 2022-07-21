@@ -15,6 +15,7 @@ const Item = ({ displayItem }) => {
 
   useEffect(() => {
     setSelect(displayItem.measures[0].label);
+    setInput(1);
   }, [displayItem]);
 
   useEffect(() => {
@@ -27,14 +28,22 @@ const Item = ({ displayItem }) => {
   const counter = (number) => {
     const result = Number.parseFloat((number / 100) * weight).toFixed(2);
     console.log(result);
-    return result;
+    if (isNaN(result)) {
+      return Number(0).toFixed(2);
+    } else {
+      return result;
+    }
   };
   const data = {
     labels: ["Carbs", "Fat", "Protein"],
     datasets: [
       {
         label: "# of calories",
-        data: [18, 18, 18],
+        data: [
+          counter(displayItem.food.nutrients.CHOCDF),
+          counter(displayItem.food.nutrients.FAT),
+          counter(displayItem.food.nutrients.PROCNT),
+        ],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
