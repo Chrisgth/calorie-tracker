@@ -9,6 +9,7 @@ import Downarrow from "../images/down-arrow.png";
 import Close from "../images/close.png";
 import { getPlans } from "../services/getPlans";
 import Plan from "../components/Plan";
+import { postNewPlan } from "../services/postNewPlan";
 const Dashboard = ({ user }) => {
   const [searchbar, setSearchBar] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -65,14 +66,22 @@ const Dashboard = ({ user }) => {
     setPlans(plansResult.data.plans);
   };
 
+  const newPlan = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    };
+    await postNewPlan(user, config);
+  };
+
   useEffect(() => {
     searchPlans();
+    console.log(user);
   }, []);
 
   return (
     <div className="dashboard">
       <div className="sidebar">
-        {plans && <button>New plan</button>}
+        {plans && <button onClick={newPlan}>New plan</button>}
         {plans &&
           plans.map((plan) => (
             <div key={plan._id}>

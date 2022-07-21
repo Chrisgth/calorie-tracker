@@ -2,11 +2,27 @@ const asyncHandler = require("express-async-handler");
 const Plan = require("../models/plans.js");
 
 const newPlan = asyncHandler(async (req, res) => {
-  const { userID, title } = req.body;
+  const { userID, title } = req.body.params;
   if (!userID || !title) {
     res.status(400);
     throw new Error("Plan must be made by a user and contain a title");
   }
+
+  const plan = await new Plan({
+    userID,
+    title,
+    description: "",
+  });
+
+  plan
+    .save()
+    .then((response) => {
+      res.status(201).json(plan);
+    })
+    .catch((err) => {
+      res.status(400);
+      throw new Error(err);
+    });
 });
 const getPlans = asyncHandler(async (req, res) => {
   userID = req.userID;
