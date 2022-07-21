@@ -1,13 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "chart.js/auto";
 import { Pie } from "react-chartjs-2";
 
 const Item = ({ displayItem }) => {
   const [input, setInput] = useState(1);
-  const changeHandler = (e) => {
+  const [select, setSelect] = useState(displayItem.measures[0].label);
+  const [weight, setWeight] = useState();
+  const inputHandler = (e) => {
     setInput(e.target.value);
-    console.log(input);
   };
+  const selectHandler = (e) => {
+    setSelect(e.target.value);
+  };
+
+  useEffect(() => {
+    setSelect(displayItem.measures[0].label);
+  }, [displayItem]);
+
+  useEffect(() => {
+    const measurement = displayItem.measures.filter(
+      (item) => item.label === select
+    );
+    setWeight(Math.round(input * measurement[0].weight));
+  }, [select, input]);
   const data = {
     labels: ["Carbs", "Fat", "Protein"],
     datasets: [
@@ -37,12 +52,18 @@ const Item = ({ displayItem }) => {
             <img src={displayItem.food.image} alt={displayItem.food.label} />
             <div className="measurements">
               <label htmlFor="amount">Amount:</label>
-              <input type="number" value={input} onChange={changeHandler} />
-              <select name="" id="">
+              <input type="number" value={input} onChange={inputHandler} />
+              <select name="" id="" value={select} onChange={selectHandler}>
                 {displayItem.measures.map((item) => (
-                  <option value={item.label}>{item.label}</option>
+                  <option
+                    value={item.label}
+                    key={displayItem.measures.indexOf(item)}
+                  >
+                    {item.label}
+                  </option>
                 ))}
               </select>
+              <p>{weight}</p>
             </div>
           </div>
           <div className="nutrition">
