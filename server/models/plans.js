@@ -16,13 +16,13 @@ const planSchema = new Schema(
     },
     plan: {
       breakfast: {
-        type: Object,
+        type: Array,
       },
       lunch: {
-        type: Object,
+        type: Array,
       },
       dinner: {
-        type: Object,
+        type: Array,
       },
     },
   },

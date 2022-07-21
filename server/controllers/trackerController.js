@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Plan = require("../models/plans.js");
 
 const newPlan = asyncHandler(async (req, res) => {
-  const { userID, title, description, plan } = req.body;
+  const { userID, title } = req.body;
   if (!userID || !title) {
     res.status(400);
     throw new Error("Plan must be made by a user and contain a title");

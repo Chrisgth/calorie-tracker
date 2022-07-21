@@ -7,15 +7,16 @@ import Item from "../components/Item";
 import Uparrow from "../images/up-arrow.png";
 import Downarrow from "../images/down-arrow.png";
 import Close from "../images/close.png";
-import axios from "axios";
+import { getPlans } from "../services/getPlans";
+import Plan from "../components/Plan";
 const Dashboard = ({ user }) => {
   const [searchbar, setSearchBar] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [result, setResult] = useState();
   const [displayItem, setDisplayItem] = useState();
-  const [displayType, setDisplayType] = useState();
+  const [displayType, setDisplayType] = useState("plan");
   const [hidden, setHidden] = useState(false);
-  const [typingTimeOut, setTypingTimeOut] = useState();
+  const [plans, setPlans] = useState();
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -56,22 +57,29 @@ const Dashboard = ({ user }) => {
     setSearchQuery(e.target.value);
   };
 
-  const config = {
-    headers: { Authorization: `Bearer ${user.token}` },
+  const searchPlans = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    };
+    const plansResult = await getPlans(config);
+    setPlans(plansResult.data.plans);
   };
 
-  const auth = () => {
-    axios
-      .get("http://localhost:5000/api/user/profile", config)
-      .then((res) => console.log(res));
-  };
-
-  console.log(user);
+  useEffect(() => {
+    searchPlans();
+  }, []);
 
   return (
     <div className="dashboard">
       <div className="sidebar">
-        <button onClick={auth}>Auth request</button>
+        {plans && <button>New plan</button>}
+        {plans &&
+          plans.map((plan) => (
+            <div key={plan._id}>
+              <p>{plan.title}</p>
+            </div>
+          ))}
+        {!plans && <LoadingSpinner />}
       </div>
       <div className="searchbar">
         <div className="search">
@@ -127,6 +135,8 @@ const Dashboard = ({ user }) => {
       </div>
       <div className="display">
         {displayType === "item" && <Item displayItem={displayItem} />}
+        {displayType === "plan" && plans && <Plan plan={plans[0]} />}
+        {displayType === "plan" && !plans && <LoadingSpinner />}
       </div>
     </div>
   );

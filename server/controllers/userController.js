@@ -2,6 +2,7 @@ const bcryptjs = require("bcryptjs");
 const User = require("../models/user.js");
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
+const Plan = require("../models/plans.js");
 
 const signup = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
@@ -31,6 +32,25 @@ const signup = asyncHandler(async (req, res) => {
     password: hashedPassword,
   });
 
+  const defaultPlan = await new Plan({
+    userID: user.id,
+    title: "Default plan",
+    description: "",
+    plan: {
+      breakfast: [],
+      lunch: [],
+      dinner: [],
+    },
+  });
+
+  defaultPlan
+    .save()
+    .then((response) => {})
+    .catch((err) => {
+      res.status(400);
+      throw new Error(err);
+    });
+
   user
     .save()
     .then((response) => {
@@ -48,10 +68,7 @@ const signup = asyncHandler(async (req, res) => {
 
 const login = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-  console.log(username, password);
   const user = await User.findOne({ username });
-
-  console.log(req.body);
 
   if (user && (await bcryptjs.compare(password, user.password))) {
     res.json({
