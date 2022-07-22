@@ -65,6 +65,7 @@ const Dashboard = ({ user }) => {
     };
     const plansResult = await getPlans(config);
     setPlans(plansResult.data.plans);
+    setSelectedPlan(plansResult.data.plans[0]);
   };
 
   const newPlan = async () => {
@@ -80,10 +81,13 @@ const Dashboard = ({ user }) => {
   useEffect(() => {
     searchPlans();
     console.log(user);
-    console.log(plans);
   }, []);
 
-  const clickHandler = (plan) => {};
+  const clickHandler = (plan) => {
+    console.log(plan);
+    setSelectedPlan(plan);
+    setDisplayType("plan");
+  };
 
   return (
     <div className="dashboard">
@@ -92,7 +96,7 @@ const Dashboard = ({ user }) => {
         {plans && <button onClick={newPlan}>New plan</button>}
         {plans &&
           plans.map((plan) => (
-            <div key={plan._id}>
+            <div key={plan._id} onClick={() => clickHandler(plan)}>
               <p>{plan.title}</p>
             </div>
           ))}
@@ -152,7 +156,7 @@ const Dashboard = ({ user }) => {
       </div>
       <div className="display">
         {displayType === "item" && <Item displayItem={displayItem} />}
-        {displayType === "plan" && plans && <Plan plan={plans[0]} />}
+        {displayType === "plan" && selectedPlan && <Plan plan={selectedPlan} />}
         {displayType === "plan" && !plans && <LoadingSpinner />}
       </div>
     </div>

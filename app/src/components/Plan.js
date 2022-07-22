@@ -1,9 +1,5 @@
-const Plan = () => {
-  return (
-    <div className="plan">
-      <p>plan</p>
-    </div>
-  );
+const Plan = ({ plan }) => {
+  return <div className="plan">{plan && <p>{plan.title}</p>}</div>;
 };
 
 export default Plan;
