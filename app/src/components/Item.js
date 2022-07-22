@@ -27,7 +27,6 @@ const Item = ({ displayItem }) => {
 
   const counter = (number) => {
     const result = Number.parseFloat((number / 100) * weight).toFixed(2);
-    console.log(result);
     if (isNaN(result)) {
       return Number(0).toFixed(2);
     } else {

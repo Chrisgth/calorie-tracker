@@ -18,6 +18,7 @@ const Dashboard = ({ user }) => {
   const [displayType, setDisplayType] = useState("plan");
   const [hidden, setHidden] = useState(false);
   const [plans, setPlans] = useState();
+  const [selectedPlan, setSelectedPlan] = useState();
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -70,17 +71,24 @@ const Dashboard = ({ user }) => {
     const config = {
       headers: { Authorization: `Bearer ${user.token}` },
     };
-    await postNewPlan(user, config);
+    const newPlanResult = await postNewPlan(user, config);
+    const newPlans = [...plans];
+    newPlans.push(newPlanResult.data);
+    setPlans(newPlans);
   };
 
   useEffect(() => {
     searchPlans();
     console.log(user);
+    console.log(plans);
   }, []);
+
+  const clickHandler = (plan) => {};
 
   return (
     <div className="dashboard">
       <div className="sidebar">
+        <h2>Meal Plans</h2>
         {plans && <button onClick={newPlan}>New plan</button>}
         {plans &&
           plans.map((plan) => (

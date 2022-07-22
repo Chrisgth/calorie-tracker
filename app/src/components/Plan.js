@@ -1,5 +1,9 @@
 const Plan = () => {
-  return <div className="plan"></div>;
+  return (
+    <div className="plan">
+      <p>plan</p>
+    </div>
+  );
 };
 
 export default Plan;

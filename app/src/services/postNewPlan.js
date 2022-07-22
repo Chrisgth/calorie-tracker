@@ -11,5 +11,5 @@ export const postNewPlan = async (user, config) => {
     },
     config
   );
-  console.log(response);
+  return response;
 };

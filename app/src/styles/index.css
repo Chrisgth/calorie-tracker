@@ -354,3 +354,46 @@ form > div > p,
 .chart {
   text-align: center;
 }
+
+.sidebar {
+  background-color: #c57b57;
+  padding: 1rem;
+}
+
+.sidebar > h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.sidebar > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+  font-weight: bolder;
+  padding: 10px 0 10px 0;
+  background-color: #f7dba7;
+  border: 2px solid black;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.sidebar > button:hover {
+  text-decoration: underline;
+}
+
+.sidebar > div {
+  margin: 4px 0 4px 0;
+  background-color: #f7dba7;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.sidebar > div:hover {
+  text-decoration: underline;
+}
