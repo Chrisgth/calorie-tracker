@@ -1,16 +1,28 @@
 import { useEffect, useState } from "react";
 import "chart.js/auto";
 import { Pie } from "react-chartjs-2";
+import { updatePlan } from "../services/updatePlan";
 
-const Item = ({ displayItem }) => {
+const Item = ({ displayItem, plans, user }) => {
   const [input, setInput] = useState(1);
   const [select, setSelect] = useState(displayItem.measures[0].label);
   const [weight, setWeight] = useState();
+  const [selectedPlan, setSelectedPlan] = useState(plans[0]._id);
+  const [selectedMeal, setSelectedMeal] = useState("breakfast");
   const inputHandler = (e) => {
     setInput(e.target.value);
   };
   const selectHandler = (e) => {
     setSelect(e.target.value);
+  };
+
+  const planHandler = (e) => {
+    setSelectedPlan(e.target.value);
+    console.log(selectedPlan);
+  };
+
+  const mealHandler = (e) => {
+    setSelectedMeal(e.target.value);
   };
 
   useEffect(() => {
@@ -32,6 +44,34 @@ const Item = ({ displayItem }) => {
     } else {
       return result;
     }
+  };
+
+  const addToPlan = () => {
+    console.log(displayItem);
+    let newPlans = [...plans];
+    let updatedPlan = newPlans.filter((plan) => plan._id === selectedPlan);
+    const item = {
+      item: displayItem,
+      measurement: select,
+      measurementQuantity: Number.parseInt(input),
+      weight: weight,
+    };
+    if (selectedMeal === "breakfast") {
+      updatedPlan[0].plan.breakfast.push(item);
+    } else if (selectedMeal === "lunch") {
+      updatedPlan[0].plan.lunch.push(item);
+    } else if (selectedMeal === "dinner") {
+      updatedPlan[0].plan.dinner.push(item);
+    } else {
+      console.log("invalid parameters");
+      return;
+    }
+
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    };
+
+    updatePlan(updatedPlan, config);
   };
   const data = {
     labels: ["Carbs", "Fat", "Protein"],
@@ -113,7 +153,27 @@ const Item = ({ displayItem }) => {
               </div>
             </div>
           </div>
-          <button>Add to Plan</button>
+          <select
+            name="plan"
+            id="plan"
+            value={selectedPlan}
+            onChange={planHandler}
+          >
+            {plans.map((plan) => (
+              <option value={plan._id}>{plan.title}</option>
+            ))}
+          </select>
+          <select
+            name="meal"
+            id="meal"
+            value={selectedMeal}
+            onChange={mealHandler}
+          >
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+          </select>
+          <button onClick={addToPlan}>Add to Plan</button>
         </div>
       )}
     </div>

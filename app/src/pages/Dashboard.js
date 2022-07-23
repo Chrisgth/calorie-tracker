@@ -66,6 +66,7 @@ const Dashboard = ({ user }) => {
     const plansResult = await getPlans(config);
     setPlans(plansResult.data.plans);
     setSelectedPlan(plansResult.data.plans[0]);
+    console.log(plansResult);
   };
 
   const newPlan = async () => {
@@ -155,7 +156,9 @@ const Dashboard = ({ user }) => {
         )}
       </div>
       <div className="display">
-        {displayType === "item" && <Item displayItem={displayItem} />}
+        {displayType === "item" && (
+          <Item displayItem={displayItem} plans={plans} user={user} />
+        )}
         {displayType === "plan" && selectedPlan && <Plan plan={selectedPlan} />}
         {displayType === "plan" && !plans && <LoadingSpinner />}
       </div>

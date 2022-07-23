@@ -37,4 +37,20 @@ const getPlans = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { newPlan, getPlans };
+const updatePlan = asyncHandler(async (req, res) => {
+  const plan = req.body.params;
+  console.log(plan);
+  if (!plan) {
+    res.status(400);
+    throw new Error("Invalid plan");
+  }
+  await Plan.findByIdAndUpdate(plan.plan[0]._id, plan.plan[0])
+    .then((response) => {
+      res.status(201).json("Item updated");
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
+});
+
+module.exports = { newPlan, getPlans, updatePlan };
