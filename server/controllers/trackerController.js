@@ -53,4 +53,18 @@ const updatePlan = asyncHandler(async (req, res) => {
     });
 });
 
-module.exports = { newPlan, getPlans, updatePlan };
+const deletePlan = asyncHandler(async (req, res) => {
+  id = req.params.id;
+  if (!id) {
+    res.status(400);
+    throw new Error("Invalid plan ID");
+  }
+  await Plan.findByIdAndDelete(id)
+    .then((response) => {
+      res.status(201).json("Plan deleted");
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
+});
+module.exports = { newPlan, getPlans, updatePlan, deletePlan };

@@ -358,6 +358,9 @@ form > div > p,
 .sidebar {
   background-color: #c57b57;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sidebar > h2 {
@@ -385,15 +388,38 @@ form > div > p,
   text-decoration: underline;
 }
 
-.sidebar > div {
+.planListItem {
   margin: 4px 0 4px 0;
   background-color: #f7dba7;
   border: 2px solid black;
   border-radius: 4px;
-  padding: 2px;
+  padding: 4px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  align-items: center;
+}
+
+.planListItem > img {
+  height: 1rem;
   cursor: pointer;
 }
 
-.sidebar > div:hover {
+.planListItem > p:hover {
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -10,6 +10,7 @@ import Close from "../images/close.png";
 import { getPlans } from "../services/getPlans";
 import Plan from "../components/Plan";
 import { postNewPlan } from "../services/postNewPlan";
+import { deletePlan } from "../services/deletePlan";
 const Dashboard = ({ user }) => {
   const [searchbar, setSearchBar] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,6 +20,7 @@ const Dashboard = ({ user }) => {
   const [hidden, setHidden] = useState(false);
   const [plans, setPlans] = useState();
   const [selectedPlan, setSelectedPlan] = useState();
+  const [sidebarLoading, setSidebarLoading] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -70,6 +72,7 @@ const Dashboard = ({ user }) => {
   };
 
   const newPlan = async () => {
+    setSidebarLoading(true);
     const config = {
       headers: { Authorization: `Bearer ${user.token}` },
     };
@@ -77,6 +80,20 @@ const Dashboard = ({ user }) => {
     const newPlans = [...plans];
     newPlans.push(newPlanResult.data);
     setPlans(newPlans);
+    setSidebarLoading(false);
+  };
+
+  const planDelete = async (plan) => {
+    setSidebarLoading(true);
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    };
+    console.log(plan._id);
+    const deletePlanResult = await deletePlan(plan, config);
+    const newPlans = [...plans];
+    newPlans.pop(plan);
+    setPlans(newPlans);
+    setSidebarLoading(false);
   };
 
   useEffect(() => {
@@ -94,14 +111,19 @@ const Dashboard = ({ user }) => {
     <div className="dashboard">
       <div className="sidebar">
         <h2>Meal Plans</h2>
-        {plans && <button onClick={newPlan}>New plan</button>}
+        {plans && sidebarLoading === false && (
+          <button onClick={newPlan}>New plan</button>
+        )}
         {plans &&
+          sidebarLoading === false &&
           plans.map((plan) => (
-            <div key={plan._id} onClick={() => clickHandler(plan)}>
-              <p>{plan.title}</p>
+            <div className="planListItem" key={plan._id}>
+              <p onClick={() => clickHandler(plan)}>{plan.title}</p>
+              <img src={Close} alt="delete" onClick={() => planDelete(plan)} />
             </div>
           ))}
         {!plans && <LoadingSpinner />}
+        {sidebarLoading && <LoadingSpinner />}
       </div>
       <div className="searchbar">
         <div className="search">
@@ -160,7 +182,9 @@ const Dashboard = ({ user }) => {
           <Item displayItem={displayItem} plans={plans} user={user} />
         )}
         {displayType === "plan" && selectedPlan && <Plan plan={selectedPlan} />}
-        {displayType === "plan" && !plans && <LoadingSpinner />}
+        {displayType === "plan" && !plans && (
+          <LoadingSpinner className="contentspinner" />
+        )}
       </div>
     </div>
   );
