@@ -11,14 +11,15 @@ const Item = ({ displayItem, plans, user }) => {
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
   const inputHandler = (e) => {
     setInput(e.target.value);
+    console.log("input");
   };
   const selectHandler = (e) => {
     setSelect(e.target.value);
+    console.log("select");
   };
 
   const planHandler = (e) => {
     setSelectedPlan(e.target.value);
-    console.log(selectedPlan);
   };
 
   const mealHandler = (e) => {
@@ -28,6 +29,7 @@ const Item = ({ displayItem, plans, user }) => {
   useEffect(() => {
     setSelect(displayItem.measures[0].label);
     setInput(1);
+    console.log("displayItem");
   }, [displayItem]);
 
   useEffect(() => {
@@ -35,7 +37,8 @@ const Item = ({ displayItem, plans, user }) => {
       (item) => item.label === select
     );
     setWeight(Math.round(input * measurement[0].weight));
-  }, [select, input]);
+    console.log(weight);
+  }, [select, input, displayItem, weight]);
 
   const counter = (number) => {
     const result = Number.parseFloat((number / 100) * weight).toFixed(2);
@@ -70,6 +73,8 @@ const Item = ({ displayItem, plans, user }) => {
     const config = {
       headers: { Authorization: `Bearer ${user.token}` },
     };
+
+    console.log(updatedPlan);
 
     updatePlan(updatedPlan, config);
   };
