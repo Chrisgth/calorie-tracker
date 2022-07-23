@@ -12,6 +12,20 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
   const [protein, setProtein] = useState();
   const [fiber, setFiber] = useState();
 
+  const updateDB = () => {
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    };
+
+    const timer = setTimeout(() => {
+      updatePlan(plan, config);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  };
+
   const titleHandler = (e) => {
     setTitle(e.target.value);
     console.log(plan);
@@ -112,6 +126,44 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
     ],
   };
 
+  const inputChangeHandler = (e, item) => {
+    let newItem = item;
+    let measurementUnit = newItem.item.measures.filter(
+      (measurement) => measurement.label === newItem.measurement
+    );
+    newItem.measurementQuantity = e.target.value;
+    newItem.weight = measurementUnit[0].weight * e.target.value;
+
+    console.log(newItem, measurementUnit);
+
+    totalCounter();
+    updateDB();
+  };
+
+  const selectChangeHandler = (e, item) => {
+    let newItem = item;
+
+    newItem.measurement = e.target.value;
+
+    let measurementUnit = newItem.item.measures.filter(
+      (measurement) => measurement.label === newItem.measurement
+    );
+
+    newItem.weight = measurementUnit[0].weight * newItem.measurementQuantity;
+
+    console.log(newItem, measurementUnit);
+
+    totalCounter();
+    updateDB();
+  };
+
+  const deleteHandler = (item, array) => {
+    array.splice(array.indexOf[item], 1);
+    console.log(item, array);
+    totalCounter();
+    updateDB();
+  };
+
   useEffect(() => {
     totalCounter();
     setTitle(plan.title);
@@ -161,19 +213,29 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
               {plan.plan.breakfast.map((meal) => (
                 <div className="meal">
                   <div className="mealimgs">
-                    <img src={Close} alt="" className="deleteMeal" />
+                    <img
+                      src={Close}
+                      alt=""
+                      className="deleteMeal"
+                      onClick={() => deleteHandler(meal, plan.plan.breakfast)}
+                    />
                     <img
                       src={meal.item.food.image}
                       alt={meal.item.food.label}
                     />
                   </div>
                   <div>{meal.item.food.label}</div>
-                  <div>
-                    <input type="text" value={meal.measurementQuantity} />
+                  <div className="planMeasurements">
+                    <input
+                      type="number"
+                      defaultValue={meal.measurementQuantity}
+                      onChange={(e) => inputChangeHandler(e, meal)}
+                    />
                     <select
                       name="measurement"
                       id="measurement"
-                      value={meal.measurement}
+                      defaultValue={meal.measurement}
+                      onChange={(e) => selectChangeHandler(e, meal)}
                     >
                       {meal.item.measures.map((measurement) => (
                         <option value={measurement.label}>
@@ -190,19 +252,29 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
               {plan.plan.lunch.map((meal) => (
                 <div className="meal">
                   <div className="mealimgs">
-                    <img src={Close} alt="" className="deleteMeal" />
+                    <img
+                      src={Close}
+                      alt=""
+                      className="deleteMeal"
+                      onClick={() => deleteHandler(meal, plan.plan.lunch)}
+                    />
                     <img
                       src={meal.item.food.image}
                       alt={meal.item.food.label}
                     />
                   </div>
                   <div>{meal.item.food.label}</div>
-                  <div>
-                    <input type="text" value={meal.measurementQuantity} />
+                  <div className="planMeasurements">
+                    <input
+                      type="number"
+                      defaultValue={meal.measurementQuantity}
+                      onChange={(e) => inputChangeHandler(e, meal)}
+                    />
                     <select
                       name="measurement"
                       id="measurement"
-                      value={meal.measurement}
+                      defaultValue={meal.measurement}
+                      onChange={(e) => selectChangeHandler(e, meal)}
                     >
                       {meal.item.measures.map((measurement) => (
                         <option value={measurement.label}>
@@ -219,19 +291,29 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
               {plan.plan.dinner.map((meal) => (
                 <div className="meal">
                   <div className="mealimgs">
-                    <img src={Close} alt="" className="deleteMeal" />
+                    <img
+                      src={Close}
+                      alt=""
+                      className="deleteMeal"
+                      onClick={() => deleteHandler(meal, plan.plan.dinner)}
+                    />
                     <img
                       src={meal.item.food.image}
                       alt={meal.item.food.label}
                     />
                   </div>
                   <div>{meal.item.food.label}</div>
-                  <div>
-                    <input type="text" value={meal.measurementQuantity} />
+                  <div className="planMeasurements">
+                    <input
+                      type="number"
+                      defaultValue={meal.measurementQuantity}
+                      onChange={(e) => inputChangeHandler(e, meal)}
+                    />
                     <select
                       name="measurement"
                       id="measurement"
-                      value={meal.measurement}
+                      defaultValue={meal.measurement}
+                      onChange={(e) => selectChangeHandler(e, meal)}
                     >
                       {meal.item.measures.map((measurement) => (
                         <option value={measurement.label}>

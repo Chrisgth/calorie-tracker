@@ -493,3 +493,17 @@ form > div > p,
   padding-left: 10px;
   cursor: pointer;
 }
+
+.planMeasurements {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.planMeasurements > input {
+  max-width: 50px;
+}
+
+.planMeasurements > select {
+  width: 100px;
+}
