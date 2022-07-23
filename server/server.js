@@ -20,7 +20,7 @@ mongoose
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
 server.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "https://chrisgth.github.io/");
   res.header(
     "Access-Control-Allow-Methods",
     "GET,HEAD,OPTIONS,POST,PUT,DELETE"
