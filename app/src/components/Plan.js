@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import { updatePlan } from "../services/updatePlan";
+import Close from "../images/close.png";
 
 const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
   const [title, setTitle] = useState(plan.title);
@@ -157,12 +158,90 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
           <div className="meals">
             <div className="breakfast">
               <h3>Breakfast</h3>
+              {plan.plan.breakfast.map((meal) => (
+                <div className="meal">
+                  <div className="mealimgs">
+                    <img src={Close} alt="" className="deleteMeal" />
+                    <img
+                      src={meal.item.food.image}
+                      alt={meal.item.food.label}
+                    />
+                  </div>
+                  <div>{meal.item.food.label}</div>
+                  <div>
+                    <input type="text" value={meal.measurementQuantity} />
+                    <select
+                      name="measurement"
+                      id="measurement"
+                      value={meal.measurement}
+                    >
+                      {meal.item.measures.map((measurement) => (
+                        <option value={measurement.label}>
+                          {measurement.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              ))}
             </div>
             <div className="lunch">
               <h3>Lunch</h3>
+              {plan.plan.lunch.map((meal) => (
+                <div className="meal">
+                  <div className="mealimgs">
+                    <img src={Close} alt="" className="deleteMeal" />
+                    <img
+                      src={meal.item.food.image}
+                      alt={meal.item.food.label}
+                    />
+                  </div>
+                  <div>{meal.item.food.label}</div>
+                  <div>
+                    <input type="text" value={meal.measurementQuantity} />
+                    <select
+                      name="measurement"
+                      id="measurement"
+                      value={meal.measurement}
+                    >
+                      {meal.item.measures.map((measurement) => (
+                        <option value={measurement.label}>
+                          {measurement.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              ))}
             </div>
             <div className="dinner">
               <h3>Dinner</h3>
+              {plan.plan.dinner.map((meal) => (
+                <div className="meal">
+                  <div className="mealimgs">
+                    <img src={Close} alt="" className="deleteMeal" />
+                    <img
+                      src={meal.item.food.image}
+                      alt={meal.item.food.label}
+                    />
+                  </div>
+                  <div>{meal.item.food.label}</div>
+                  <div>
+                    <input type="text" value={meal.measurementQuantity} />
+                    <select
+                      name="measurement"
+                      id="measurement"
+                      value={meal.measurement}
+                    >
+                      {meal.item.measures.map((measurement) => (
+                        <option value={measurement.label}>
+                          {measurement.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

@@ -1,3 +1,6 @@
+html {
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -20,11 +23,17 @@ p {
 .App {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 100vh;
 }
 
 .content {
-  height: 100%;
+  max-height: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
 }
 
 .navbar {
@@ -96,7 +105,6 @@ p {
   padding: 0.5rem;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
   background-color: #2b2d42;
   color: #edf2f4;
 }
@@ -135,6 +143,7 @@ form > div > p,
 .dashboard {
   display: grid;
   height: 100%;
+  width: 97%;
   grid-template: 1fr 14fr/ 1fr 4fr;
   gap: 8px;
 }
@@ -361,6 +370,8 @@ form > div > p,
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar > h2 {
@@ -411,15 +422,74 @@ form > div > p,
   cursor: pointer;
 }
 
+.planDisplay {
+  width: 100%;
+  height: 100%;
+}
+
 .plan {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-height: 100%;
+}
+
+.nutrition,
+.meals {
+  width: 100%;
+}
+
+.nutrition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.meals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.meals > div {
+  width: 50%;
 }
 
 .display {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
+  max-height: 100%;
+}
+
+.meal {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7dba7;
+  padding: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+.mealimgs {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.mealimgs > img {
+  max-height: 40px;
+}
+
+.deleteMeal {
+  height: 20px;
+  padding-left: 10px;
+  cursor: pointer;
 }
