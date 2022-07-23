@@ -26,6 +26,7 @@ function App() {
         <Nav user={user} setUser={setUser} />
         <div className="content">
           <Routes>
+            <Route path="/calorie-tracker" element={<Navigate to="/" />} />
             <Route
               path="/sign-up"
               element={
