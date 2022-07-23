@@ -76,7 +76,7 @@ const Item = ({ displayItem, plans, user }) => {
 
     console.log(updatedPlan);
 
-    updatePlan(updatedPlan, config);
+    updatePlan(updatedPlan[0], config);
   };
   const data = {
     labels: ["Carbs", "Fat", "Protein"],

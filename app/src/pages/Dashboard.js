@@ -182,10 +182,16 @@ const Dashboard = ({ user }) => {
         {displayType === "item" && (
           <Item displayItem={displayItem} plans={plans} user={user} />
         )}
-        {displayType === "plan" && selectedPlan && <Plan plan={selectedPlan} />}
-        {displayType === "plan" && !plans && (
-          <LoadingSpinner className="contentspinner" />
+        {displayType === "plan" && selectedPlan && (
+          <Plan
+            plan={selectedPlan}
+            setPlan={setSelectedPlan}
+            plans={plans}
+            setPlans={setPlans}
+            user={user}
+          />
         )}
+        {displayType === "plan" && !plans && <LoadingSpinner />}
       </div>
     </div>
   );

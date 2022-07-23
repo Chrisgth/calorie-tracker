@@ -38,13 +38,14 @@ const getPlans = asyncHandler(async (req, res) => {
 });
 
 const updatePlan = asyncHandler(async (req, res) => {
-  const plan = req.body.params;
+  const { plan } = req.body.params;
   console.log(plan);
+  console.log(plan.plan._id);
   if (!plan) {
     res.status(400);
     throw new Error("Invalid plan");
   }
-  await Plan.findByIdAndUpdate(plan.plan[0]._id, plan.plan[0])
+  await Plan.findByIdAndUpdate(plan._id, plan)
     .then((response) => {
       res.status(201).json("Item updated");
     })

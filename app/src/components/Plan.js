@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
-const Plan = ({ plan }) => {
+import { updatePlan } from "../services/updatePlan";
+
+const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
   const [title, setTitle] = useState(plan.title);
   const [calories, setCalories] = useState();
   const [carbs, setCarbs] = useState();
@@ -12,8 +14,25 @@ const Plan = ({ plan }) => {
   const titleHandler = (e) => {
     setTitle(e.target.value);
     console.log(plan);
-    totalCounter();
   };
+
+  useEffect(() => {
+    const newPlans = [...plans];
+    newPlans[newPlans.indexOf(plan)].title = title;
+    setPlans(newPlans);
+
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` },
+    };
+
+    const t = setTimeout(() => {
+      updatePlan(plan, config);
+    }, 1000);
+
+    return () => {
+      clearTimeout(t);
+    };
+  }, [title]);
 
   const counter = (number, weight) => {
     const result = Math.round((number / 100) * weight * 1e2) / 1e2;
@@ -76,7 +95,7 @@ const Plan = ({ plan }) => {
     datasets: [
       {
         label: "# of calories",
-        data: [44, 44, 44],
+        data: [carbs, fat, protein],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -91,6 +110,11 @@ const Plan = ({ plan }) => {
       },
     ],
   };
+
+  useEffect(() => {
+    totalCounter();
+    setTitle(plan.title);
+  }, [plan]);
   return (
     <div className="planDisplay">
       {plan && (
@@ -128,6 +152,17 @@ const Plan = ({ plan }) => {
               <div className="pieChart">
                 <Pie height={300} width={300} data={data} />
               </div>
+            </div>
+          </div>
+          <div className="meals">
+            <div className="breakfast">
+              <h3>Breakfast</h3>
+            </div>
+            <div className="lunch">
+              <h3>Lunch</h3>
+            </div>
+            <div className="dinner">
+              <h3>Dinner</h3>
             </div>
           </div>
         </div>
