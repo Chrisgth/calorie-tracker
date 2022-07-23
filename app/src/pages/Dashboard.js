@@ -91,8 +91,9 @@ const Dashboard = ({ user }) => {
     console.log(plan._id);
     const deletePlanResult = await deletePlan(plan, config);
     const newPlans = [...plans];
-    newPlans.pop(plan);
+    newPlans.splice(plans.indexOf(plan), 1);
     setPlans(newPlans);
+    setSelectedPlan(plans[0]);
     setSidebarLoading(false);
   };
 
