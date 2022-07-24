@@ -103,7 +103,6 @@ const Dashboard = ({ user }) => {
   }, []);
 
   const clickHandler = (plan) => {
-    console.log(plan);
     setSelectedPlan(plan);
     setDisplayType("plan");
   };

@@ -507,3 +507,10 @@ form > div > p,
 .planMeasurements > select {
   width: 100px;
 }
+
+.emptyPlan {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

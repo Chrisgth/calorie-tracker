@@ -11,6 +11,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
   const [fat, setFat] = useState();
   const [protein, setProtein] = useState();
   const [fiber, setFiber] = useState();
+  const [planEmpty, setPlanEmpty] = useState(true);
 
   const updateDB = () => {
     const config = {
@@ -151,20 +152,39 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
     updateDB();
   };
 
+  const checkPlan = () => {
+    for (const meal in plan.plan) {
+      if (plan.plan[meal].length !== 0) {
+        return setPlanEmpty(false);
+      } else {
+        return setPlanEmpty(true);
+      }
+    }
+    console.log("plan checked");
+  };
+
   const deleteHandler = (item, array) => {
     array.splice(array.indexOf(item), 1);
-    console.log(item, array);
+    checkPlan();
     totalCounter();
     updateDB();
   };
 
   useEffect(() => {
     totalCounter();
-    setTitle(plan.title);
+    checkPlan();
   }, [plan]);
   return (
     <div className="planDisplay">
-      {plan && (
+      {plan && planEmpty && (
+        <div className="emptyPlan">
+          <p>
+            Looks like this plan is empty, search for some food to add to it in
+            the searchbar above.
+          </p>
+        </div>
+      )}
+      {plan && !planEmpty && (
         <div className="plan">
           <input type="text" value={title} onChange={titleHandler} />
           <div className="nutrition">
