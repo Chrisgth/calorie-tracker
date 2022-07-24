@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const postNewPlan = async (user, config) => {
   const response = await axios.post(
-    "https://chrisgth-calorie-tracker.herokuapp.com/api/tracker/new-plan",
+    "http://localhost:5000/api/tracker/new-plan",
     {
       params: {
         title: "Meal Plan",

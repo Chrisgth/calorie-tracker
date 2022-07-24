@@ -67,7 +67,6 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
     let fiber = 0;
 
     if (plan.plan.breakfast !== []) {
-      console.log("breakfast");
       plan.plan.breakfast.forEach((item) => {
         kcal += counter(item.item.food.nutrients.ENERC_KCAL, item.weight);
         carbs += counter(item.item.food.nutrients.CHOCDF, item.weight);
@@ -77,7 +76,6 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
       });
     }
     if (plan.plan.lunch !== []) {
-      console.log("lunch");
       plan.plan.lunch.forEach((item) => {
         kcal += counter(item.item.food.nutrients.ENERC_KCAL, item.weight);
         carbs += counter(item.item.food.nutrients.CHOCDF, item.weight);
@@ -87,14 +85,12 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
       });
     }
     if (plan.plan.dinner !== []) {
-      console.log("dinner");
       plan.plan.dinner.forEach((item) => {
         kcal += counter(item.item.food.nutrients.ENERC_KCAL, item.weight);
         carbs += counter(item.item.food.nutrients.CHOCDF, item.weight);
         fat += counter(item.item.food.nutrients.FAT, item.weight);
         protein += counter(item.item.food.nutrients.PROCNT, item.weight);
         fiber += counter(item.item.food.nutrients.FIBTG, item.weight);
-        console.log(item.item.food.nutrients.PROCNT);
       });
     }
 
@@ -134,8 +130,6 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
     newItem.measurementQuantity = e.target.value;
     newItem.weight = measurementUnit[0].weight * e.target.value;
 
-    console.log(newItem, measurementUnit);
-
     totalCounter();
     updateDB();
   };
@@ -151,14 +145,13 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
 
     newItem.weight = measurementUnit[0].weight * newItem.measurementQuantity;
 
-    console.log(newItem, measurementUnit);
-
     totalCounter();
     updateDB();
   };
 
   const deleteHandler = (item, array) => {
-    array.splice(array.indexOf[item], 1);
+    array.splice(array.indexOf(item), 1);
+    console.log("deleted");
     console.log(item, array);
     totalCounter();
     updateDB();
