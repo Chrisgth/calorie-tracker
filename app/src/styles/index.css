@@ -32,7 +32,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  box-sizing: border-box;
   width: 100%;
 }
 
@@ -317,19 +317,25 @@ form > div > p,
 }
 
 .pieChart {
-  max-height: 300px;
-  max-width: 300px;
+  max-height: 200px;
+  max-width: 200px;
 }
 .itemDisplay,
 .itemDisplayContainer {
-  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .itemDisplay {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  gap: 2rem;
+  min-height: 0;
+}
+
+.itemDisplay > h2 {
+  margin: 0;
 }
 
 .itemPeripherals {
@@ -340,7 +346,7 @@ form > div > p,
 }
 .itemPeripherals > img {
   border: 4px solid #c57b57;
-  max-height: 400px;
+  max-height: 200px;
   border-radius: 8px;
 }
 
@@ -442,7 +448,7 @@ form > div > p,
 
 .nutrition {
   display: flex;
-  align-items: center;
+
   justify-content: center;
 }
 
@@ -462,7 +468,8 @@ form > div > p,
   flex-direction: column;
   align-items: center;
   overflow: auto;
-  max-height: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
 }
 
 .meal {
@@ -482,6 +489,7 @@ form > div > p,
   display: flex;
   gap: 40px;
   align-items: center;
+  margin-right: 4px;
 }
 
 .mealimgs > img {
@@ -513,4 +521,99 @@ form > div > p,
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.plan {
+  max-width: 100%;
+}
+
+.plan > input {
+  background-color: #f7dba7;
+  font-size: 1rem;
+  border: 2px solid black;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.itemSelectors {
+  padding-top: 1rem;
+}
+
+.measurements > input {
+  max-width: 50px;
+}
+
+@media (max-width: 920px) {
+  .dashboard {
+    overflow: auto;
+  }
+  .meals > div {
+    width: auto;
+    min-width: 70%;
+  }
+
+  .mealLabel {
+    max-width: 100px;
+  }
+
+  .hints {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+  }
+
+  .hint {
+    box-sizing: border-box;
+  }
+}
+@media (max-width: 700px) {
+  .itemPeripherals {
+    flex-direction: column;
+  }
+  .itemPeripherals > img {
+    width: 100px;
+  }
+  .nutrition {
+    flex-direction: column;
+    align-items: center;
+  }
+  .meal {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .mealimgs {
+    width: 100%;
+    align-items: center;
+    margin-right: 0;
+    justify-content: center;
+    gap: 1rem;
+    flex-direction: column-reverse;
+  }
+  .deleteMeal {
+    order: 2;
+    justify-content: flex-end;
+    padding: 0;
+  }
+  .mealLabel {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar {
+    height: 100%;
+  }
+  .login {
+    text-align: center;
+  }
+  .nutrition {
+    gap: 1rem;
+  }
+}
+@media (max-width: 470px) {
+  .hints {
+    grid-template-columns: repeat(1, minmax(150px, 1fr));
+  }
 }

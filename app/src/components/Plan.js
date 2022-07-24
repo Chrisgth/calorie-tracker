@@ -29,7 +29,6 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
 
   const titleHandler = (e) => {
     setTitle(e.target.value);
-    console.log(plan);
   };
 
   useEffect(() => {
@@ -193,7 +192,12 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
       )}
       {plan && !planEmpty && (
         <div className="plan">
-          <input type="text" value={title} onChange={titleHandler} />
+          <input
+            type="text"
+            value={title}
+            onChange={titleHandler}
+            maxLength="30"
+          />
           <div className="nutrition">
             <div className="quickStats">
               <p>QUICK SUMMARY</p>
@@ -245,7 +249,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       alt={meal.item.food.label}
                     />
                   </div>
-                  <div>{meal.item.food.label}</div>
+                  <div className="mealLabel">{meal.item.food.label}</div>
                   <div className="planMeasurements">
                     <input
                       type="number"
@@ -288,7 +292,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       alt={meal.item.food.label}
                     />
                   </div>
-                  <div>{meal.item.food.label}</div>
+                  <div className="mealLabel">{meal.item.food.label}</div>
                   <div className="planMeasurements">
                     <input
                       type="number"
@@ -328,7 +332,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       alt={meal.item.food.label}
                     />
                   </div>
-                  <div>{meal.item.food.label}</div>
+                  <div className="mealLabel">{meal.item.food.label}</div>
                   <div className="planMeasurements">
                     <input
                       type="number"

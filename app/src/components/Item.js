@@ -152,31 +152,33 @@ const Item = ({ displayItem, plans, user }) => {
             <div className="chart">
               <p>CALORIES FROM</p>
               <div className="pieChart">
-                <Pie height={300} width={300} data={data} />
+                <Pie height={200} width={200} data={data} />
               </div>
             </div>
           </div>
-          <select
-            name="plan"
-            id="plan"
-            value={selectedPlan}
-            onChange={planHandler}
-          >
-            {plans.map((plan) => (
-              <option value={plan._id}>{plan.title}</option>
-            ))}
-          </select>
-          <select
-            name="meal"
-            id="meal"
-            value={selectedMeal}
-            onChange={mealHandler}
-          >
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-          </select>
-          <button onClick={addToPlan}>Add to Plan</button>
+          <div className="itemSelectors">
+            <select
+              name="plan"
+              id="plan"
+              value={selectedPlan}
+              onChange={planHandler}
+            >
+              {plans.map((plan) => (
+                <option value={plan._id}>{plan.title}</option>
+              ))}
+            </select>
+            <select
+              name="meal"
+              id="meal"
+              value={selectedMeal}
+              onChange={mealHandler}
+            >
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+            </select>
+            <button onClick={addToPlan}>Add to Plan</button>
+          </div>
         </div>
       )}
     </div>

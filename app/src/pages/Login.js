@@ -38,7 +38,10 @@ const Login = ({ setUser }) => {
 
     setLoading(true);
     axios
-      .post("http://localhost:5000/api/user/log-in", data)
+      .post(
+        "https://chrisgth-calorie-tracker.herokuapp.com/api/user/log-in",
+        data
+      )
       .then((response) => {
         localStorage.setItem("user", JSON.stringify(response.data));
         setUser(response.data);
