@@ -127,7 +127,9 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
     let measurementUnit = newItem.item.measures.filter(
       (measurement) => measurement.label === newItem.measurement
     );
-    newItem.measurementQuantity = e.target.value;
+
+    newItem.measurementQuantity = Number(e.target.value);
+    if (newItem.measurementQuantity === 0) newItem.measurementQuantity = 1;
     newItem.weight = measurementUnit[0].weight * e.target.value;
 
     totalCounter();
@@ -151,7 +153,6 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
 
   const deleteHandler = (item, array) => {
     array.splice(array.indexOf(item), 1);
-    console.log("deleted");
     console.log(item, array);
     totalCounter();
     updateDB();
@@ -221,13 +222,14 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                   <div className="planMeasurements">
                     <input
                       type="number"
-                      defaultValue={meal.measurementQuantity}
+                      value={meal.measurementQuantity}
                       onChange={(e) => inputChangeHandler(e, meal)}
+                      min="1"
                     />
                     <select
                       name="measurement"
                       id="measurement"
-                      defaultValue={meal.measurement}
+                      value={meal.measurement}
                       onChange={(e) => selectChangeHandler(e, meal)}
                     >
                       {meal.item.measures.map((measurement) => (
@@ -260,13 +262,14 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                   <div className="planMeasurements">
                     <input
                       type="number"
-                      defaultValue={meal.measurementQuantity}
+                      value={meal.measurementQuantity}
                       onChange={(e) => inputChangeHandler(e, meal)}
+                      min="1"
                     />
                     <select
                       name="measurement"
                       id="measurement"
-                      defaultValue={meal.measurement}
+                      value={meal.measurement}
                       onChange={(e) => selectChangeHandler(e, meal)}
                     >
                       {meal.item.measures.map((measurement) => (
@@ -299,13 +302,14 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                   <div className="planMeasurements">
                     <input
                       type="number"
-                      defaultValue={meal.measurementQuantity}
+                      value={meal.measurementQuantity}
                       onChange={(e) => inputChangeHandler(e, meal)}
+                      min="1"
                     />
                     <select
                       name="measurement"
                       id="measurement"
-                      defaultValue={meal.measurement}
+                      value={meal.measurement}
                       onChange={(e) => selectChangeHandler(e, meal)}
                     >
                       {meal.item.measures.map((measurement) => (
