@@ -137,9 +137,10 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
     updateDB();
   };
 
+  const [select, setSelect] = useState(true);
+
   const selectChangeHandler = (e, item) => {
     let newItem = item;
-
     newItem.measurement = e.target.value;
 
     let measurementUnit = newItem.item.measures.filter(
@@ -150,17 +151,21 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
 
     totalCounter();
     updateDB();
+
+    if (select === true) {
+      setSelect(false);
+    } else {
+      setSelect(true);
+    }
   };
 
   const checkPlan = () => {
     for (const meal in plan.plan) {
       if (plan.plan[meal].length !== 0) {
         return setPlanEmpty(false);
-      } else {
-        return setPlanEmpty(true);
       }
     }
-    console.log("plan checked");
+    return setPlanEmpty(true);
   };
 
   const deleteHandler = (item, array) => {
@@ -173,7 +178,9 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
   useEffect(() => {
     totalCounter();
     checkPlan();
+    setTitle(plan.title);
   }, [plan]);
+
   return (
     <div className="planDisplay">
       {plan && planEmpty && (
@@ -253,7 +260,10 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       onChange={(e) => selectChangeHandler(e, meal)}
                     >
                       {meal.item.measures.map((measurement) => (
-                        <option value={measurement.label}>
+                        <option
+                          value={measurement.label}
+                          onClick={(e) => selectChangeHandler(e, meal)}
+                        >
                           {measurement.label}
                         </option>
                       ))}

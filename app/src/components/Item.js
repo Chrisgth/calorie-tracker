@@ -11,11 +11,9 @@ const Item = ({ displayItem, plans, user }) => {
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
   const inputHandler = (e) => {
     setInput(e.target.value);
-    console.log("input");
   };
   const selectHandler = (e) => {
     setSelect(e.target.value);
-    console.log("select");
   };
 
   const planHandler = (e) => {
