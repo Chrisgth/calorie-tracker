@@ -190,6 +190,11 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
           </p>
         </div>
       )}
+      {plans.length === 0 && (
+        <div className="emptyPlan">
+          <p>No plans</p>
+        </div>
+      )}
       {plan && !planEmpty && (
         <div className="plan">
           <input
@@ -267,6 +272,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                         <option
                           value={measurement.label}
                           onClick={(e) => selectChangeHandler(e, meal)}
+                          key={meal.item.measures.indexOf(measurement)}
                         >
                           {measurement.label}
                         </option>

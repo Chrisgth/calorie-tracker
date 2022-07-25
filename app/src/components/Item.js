@@ -10,9 +10,14 @@ const Item = ({ displayItem, plans, user }) => {
   const [selectedPlan, setSelectedPlan] = useState();
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
 
-  if (plans) {
-    setSelectedPlan(plans[0]._id);
-  }
+  useEffect(() => {
+    if (plans.length !== 0) {
+      setSelectedPlan(plans[0]._id);
+    }
+    if (plans === []) {
+      setSelectedPlan();
+    }
+  }, [plans]);
 
   const inputHandler = (e) => {
     setInput(e.target.value);
@@ -156,7 +161,7 @@ const Item = ({ displayItem, plans, user }) => {
               </div>
             </div>
           </div>
-          {plans && (
+          {plans.length !== 0 && (
             <div className="itemSelectors">
               <select
                 name="plan"
@@ -165,7 +170,9 @@ const Item = ({ displayItem, plans, user }) => {
                 onChange={planHandler}
               >
                 {plans.map((plan) => (
-                  <option value={plan._id}>{plan.title}</option>
+                  <option value={plan._id} key={plans.indexOf(plan)}>
+                    {plan.title}
+                  </option>
                 ))}
               </select>
               <select

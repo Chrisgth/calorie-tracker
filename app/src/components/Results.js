@@ -12,11 +12,8 @@ const Results = ({
   let hintArray;
 
   if (result?.data.parsed.length !== 0) {
-    console.log(result);
     parsedResult = result.data.parsed[0].food;
     hintArray = result.data.hints.slice(1, 10);
-    // console.log(parsedResult);
-    // console.log(hintArray);
   }
 
   const clickHandler = (arrItem) => {
@@ -25,7 +22,6 @@ const Results = ({
     setResult();
     setSearchBar();
     setSearchQuery("");
-    console.log(arrItem);
   };
 
   return (

@@ -5,6 +5,5 @@ export const getPlans = async (config) => {
     "https://chrisgth-calorie-tracker.herokuapp.com/api/tracker/get-plans",
     config
   );
-  console.log(response);
   return response;
 };

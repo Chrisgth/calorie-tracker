@@ -66,8 +66,14 @@ const Dashboard = ({ user }) => {
       headers: { Authorization: `Bearer ${user.token}` },
     };
     const plansResult = await getPlans(config);
-    setPlans(plansResult.data.plans);
-    setSelectedPlan(plansResult.data.plans[0]);
+    if (plansResult.data.plans.length !== 0) {
+      setPlans(plansResult.data.plans);
+      setSelectedPlan(plansResult.data.plans[0]);
+    } else {
+      setPlans([]);
+      setSelectedPlan();
+      console.log(selectedPlan);
+    }
   };
 
   const newPlan = async () => {
@@ -80,6 +86,7 @@ const Dashboard = ({ user }) => {
     newPlans.push(newPlanResult.data);
     setPlans(newPlans);
     setSidebarLoading(false);
+    if (!selectedPlan) setSelectedPlan(newPlans[0]);
   };
 
   const planDelete = async (plan) => {
@@ -91,7 +98,11 @@ const Dashboard = ({ user }) => {
     const newPlans = [...plans];
     newPlans.splice(plans.indexOf(plan), 1);
     setPlans(newPlans);
-    setSelectedPlan(plans[0]);
+    if (plans.length === 1) {
+      setSelectedPlan();
+    } else {
+      setSelectedPlan(newPlans[0]);
+    }
     setSidebarLoading(false);
   };
 
