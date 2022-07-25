@@ -20,4 +20,4 @@ API used: https://developer.edamam.com/food-database-api-docs.
 
 Created by Kristupas Jusas (Chrisgth)
 
-** Loading times may be slow due to the databse being hosted on herokuapp
+** Loading times may be slow due to the database being hosted on herokuapp
