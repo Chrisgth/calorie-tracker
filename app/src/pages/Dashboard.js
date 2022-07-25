@@ -68,7 +68,6 @@ const Dashboard = ({ user }) => {
     const plansResult = await getPlans(config);
     setPlans(plansResult.data.plans);
     setSelectedPlan(plansResult.data.plans[0]);
-    console.log(plansResult);
   };
 
   const newPlan = async () => {
@@ -88,7 +87,6 @@ const Dashboard = ({ user }) => {
     const config = {
       headers: { Authorization: `Bearer ${user.token}` },
     };
-    console.log(plan._id);
     const deletePlanResult = await deletePlan(plan, config);
     const newPlans = [...plans];
     newPlans.splice(plans.indexOf(plan), 1);
@@ -99,7 +97,6 @@ const Dashboard = ({ user }) => {
 
   useEffect(() => {
     searchPlans();
-    console.log(user);
   }, []);
 
   const clickHandler = (plan) => {
