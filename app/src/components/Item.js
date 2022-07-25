@@ -7,8 +7,13 @@ const Item = ({ displayItem, plans, user }) => {
   const [input, setInput] = useState(1);
   const [select, setSelect] = useState(displayItem.measures[0].label);
   const [weight, setWeight] = useState();
-  const [selectedPlan, setSelectedPlan] = useState(plans[0]._id);
+  const [selectedPlan, setSelectedPlan] = useState();
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
+
+  if (plans) {
+    setSelectedPlan(plans[0]._id);
+  }
+
   const inputHandler = (e) => {
     setInput(e.target.value);
   };
