@@ -17,4 +17,7 @@ A calorie tracker app built using the MERN stack.
 - The front end makes fetch requests utilizing the axios package.
 
 API used: https://developer.edamam.com/food-database-api-docs.
+
 Created by Kristupas Jusas (Chrisgth)
+
+** Loading times may be slow due to the databse being hosted on herokuapp
