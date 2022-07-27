@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import LoadingSpinner from "../components/Spinner";
-const axios = require("axios").default;
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import LoadingSpinner from '../components/Spinner';
+const axios = require('axios').default;
 
 const Login = ({ setUser }) => {
   const {
@@ -15,8 +15,8 @@ const Login = ({ setUser }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [data, setData] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
   const { username, password } = data;
@@ -29,7 +29,7 @@ const Login = ({ setUser }) => {
   };
 
   const clickHandler = (e) => {
-    const form = document.querySelector(".loginform");
+    const form = document.querySelector('.loginform');
 
     if (form.checkValidity() === false) {
       form.reportValidity();
@@ -38,12 +38,9 @@ const Login = ({ setUser }) => {
 
     setLoading(true);
     axios
-      .post(
-        "https://chrisgth-calorie-tracker.herokuapp.com/api/user/log-in",
-        data
-      )
+      .post('https://chrisgth-calorie-tracker.herokuapp.com/api/user/log-in', data)
       .then((response) => {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem('user', JSON.stringify(response.data));
         setUser(response.data);
         setError(false);
         setLoading(false);
@@ -66,11 +63,11 @@ const Login = ({ setUser }) => {
             <input
               type="text"
               id="username"
-              {...register("username", { required: "This field is required" })}
+              {...register('username', { required: 'This field is required' })}
               placeholder="Username"
               value={username}
               onChange={onChange}
-              className={`${errors.username ? "errorborder" : ""}`}
+              className={`${errors.username ? 'errorborder' : ''}`}
             />
             <p>{errors.username?.message}</p>
           </div>
@@ -78,18 +75,16 @@ const Login = ({ setUser }) => {
             <input
               type="password"
               id="password"
-              {...register("password", { required: "This field is required" })}
+              {...register('password', { required: 'This field is required' })}
               placeholder="Password"
               value={password}
               onChange={onChange}
-              className={`${errors.password ? "errorborder" : ""}`}
+              className={`${errors.password ? 'errorborder' : ''}`}
             />
             <p>{errors.password?.message}</p>
           </div>
           <button>Submit</button>
-          {error === 400 && (
-            <p className="error">Invalid username or password</p>
-          )}
+          {error === 400 && <p className="error">Invalid username or password</p>}
         </form>
       )}
       <p>Don't have an account?</p>

@@ -1,21 +1,16 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
-import Login from "./Login";
-import Signup from "./Signup";
-import Dashboard from "./Dashboard";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Login from './Login';
+import Signup from './Signup';
+import Dashboard from './Dashboard';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
+import { useEffect, useState } from 'react';
 
 function App() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user")));
+    setUser(JSON.parse(localStorage.getItem('user')));
   }, []);
 
   useEffect(() => {}, [user]);
@@ -29,29 +24,15 @@ function App() {
             <Route path="/calorie-tracker" element={<Navigate to="/" />} />
             <Route
               path="/sign-up"
-              element={
-                user ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Signup setUser={setUser} user={user} />
-                )
-              }
+              element={user ? <Navigate to="/" /> : <Signup setUser={setUser} user={user} />}
             />
             <Route
               path="/log-in"
-              element={
-                user ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Login setUser={setUser} user={user} />
-                )
-              }
+              element={user ? <Navigate to="/" /> : <Login setUser={setUser} user={user} />}
             />
             <Route
               path="/"
-              element={
-                !user ? <Navigate to="/log-in" /> : <Dashboard user={user} />
-              }
+              element={!user ? <Navigate to="/log-in" /> : <Dashboard user={user} />}
             />
           </Routes>
         </div>

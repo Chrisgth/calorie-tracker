@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import LoadingSpinner from "../components/Spinner";
-import Search from "../images/loupe.png";
-import Results from "../components/Results";
-import { getFood } from "../services/getFood";
-import Item from "../components/Item";
-import Uparrow from "../images/up-arrow.png";
-import Downarrow from "../images/down-arrow.png";
-import Close from "../images/close.png";
-import { getPlans } from "../services/getPlans";
-import Plan from "../components/Plan";
-import { postNewPlan } from "../services/postNewPlan";
-import { deletePlan } from "../services/deletePlan";
+import { useEffect, useState } from 'react';
+import LoadingSpinner from '../components/Spinner';
+import Search from '../images/loupe.png';
+import Results from '../components/Results';
+import { getFood } from '../services/getFood';
+import Item from '../components/Item';
+import Uparrow from '../images/up-arrow.png';
+import Downarrow from '../images/down-arrow.png';
+import Close from '../images/close.png';
+import { getPlans } from '../services/getPlans';
+import Plan from '../components/Plan';
+import { postNewPlan } from '../services/postNewPlan';
+import { deletePlan } from '../services/deletePlan';
 const Dashboard = ({ user }) => {
   const [searchbar, setSearchBar] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [result, setResult] = useState();
   const [displayItem, setDisplayItem] = useState();
-  const [displayType, setDisplayType] = useState("plan");
+  const [displayType, setDisplayType] = useState('plan');
   const [hidden, setHidden] = useState(false);
   const [plans, setPlans] = useState();
   const [selectedPlan, setSelectedPlan] = useState();
@@ -27,7 +27,7 @@ const Dashboard = ({ user }) => {
       searchFoods();
     }, 500);
 
-    if (searchQuery === "") {
+    if (searchQuery === '') {
       setSearchBar(false);
     } else {
       setHidden(false);
@@ -42,14 +42,14 @@ const Dashboard = ({ user }) => {
 
   useEffect(() => {
     if (result?.data.parsed.length === 0) {
-      console.log("refine your search");
+      console.log('refine your search');
     } else {
       return;
     }
   }, [result]);
 
   const searchFoods = async () => {
-    if (searchQuery === "") {
+    if (searchQuery === '') {
       return;
     } else {
       const searchResult = await getFood(searchQuery);
@@ -112,16 +112,14 @@ const Dashboard = ({ user }) => {
 
   const clickHandler = (plan) => {
     setSelectedPlan(plan);
-    setDisplayType("plan");
+    setDisplayType('plan');
   };
 
   return (
     <div className="dashboard">
       <div className="sidebar">
         <h2>Meal Plans</h2>
-        {plans && sidebarLoading === false && (
-          <button onClick={newPlan}>New plan</button>
-        )}
+        {plans && sidebarLoading === false && <button onClick={newPlan}>New plan</button>}
         {plans &&
           sidebarLoading === false &&
           plans.map((plan) => (
@@ -144,12 +142,7 @@ const Dashboard = ({ user }) => {
             value={searchQuery}
             autoComplete="off"
           />
-          <img
-            src={Close}
-            alt="cross"
-            id="close"
-            onClick={() => setSearchQuery("")}
-          />
+          <img src={Close} alt="cross" id="close" onClick={() => setSearchQuery('')} />
         </div>
         {searchbar && (
           <div className="dropdown">
@@ -166,12 +159,7 @@ const Dashboard = ({ user }) => {
             )}
             <button className="searchHide">
               {!hidden && (
-                <img
-                  src={Uparrow}
-                  alt="up arrow"
-                  id="hide"
-                  onClick={() => setHidden(true)}
-                />
+                <img src={Uparrow} alt="up arrow" id="hide" onClick={() => setHidden(true)} />
               )}
               {hidden && (
                 <img
@@ -186,10 +174,16 @@ const Dashboard = ({ user }) => {
         )}
       </div>
       <div className="display">
-        {displayType === "item" && (
-          <Item displayItem={displayItem} plans={plans} user={user} />
+        {displayType === 'item' && (
+          <Item
+            displayItem={displayItem}
+            plans={plans}
+            user={user}
+            setDisplayType={setDisplayType}
+            setSelectedPlan={setSelectedPlan}
+          />
         )}
-        {displayType === "plan" && selectedPlan && (
+        {displayType === 'plan' && selectedPlan && (
           <Plan
             plan={selectedPlan}
             setPlan={setSelectedPlan}
@@ -198,7 +192,7 @@ const Dashboard = ({ user }) => {
             user={user}
           />
         )}
-        {displayType === "plan" && !plans && <LoadingSpinner />}
+        {displayType === 'plan' && !plans && <LoadingSpinner />}
       </div>
     </div>
   );

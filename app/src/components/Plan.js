@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { Pie } from "react-chartjs-2";
-import "chart.js/auto";
-import { updatePlan } from "../services/updatePlan";
-import Close from "../images/close.png";
+import { useEffect, useState } from 'react';
+import { Pie } from 'react-chartjs-2';
+import 'chart.js/auto';
+import { updatePlan } from '../services/updatePlan';
+import Close from '../images/close.png';
+import Food from '../images/vegetable.png';
 
 const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
   const [title, setTitle] = useState(plan.title);
@@ -102,21 +103,17 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
   };
 
   const data = {
-    labels: ["Carbs", "Fat", "Protein"],
+    labels: ['Carbs', 'Fat', 'Protein'],
     datasets: [
       {
-        label: "# of calories",
+        label: '# of calories',
         data: [carbs, fat, protein],
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
         ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-        ],
+        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
         borderWidth: 2,
       },
     ],
@@ -125,7 +122,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
   const inputChangeHandler = (e, item) => {
     let newItem = item;
     let measurementUnit = newItem.item.measures.filter(
-      (measurement) => measurement.label === newItem.measurement
+      (measurement) => measurement.label === newItem.measurement,
     );
 
     newItem.measurementQuantity = Number(e.target.value);
@@ -143,7 +140,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
     newItem.measurement = e.target.value;
 
     let measurementUnit = newItem.item.measures.filter(
-      (measurement) => measurement.label === newItem.measurement
+      (measurement) => measurement.label === newItem.measurement,
     );
 
     newItem.weight = measurementUnit[0].weight * newItem.measurementQuantity;
@@ -185,8 +182,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
       {plan && planEmpty && (
         <div className="emptyPlan">
           <p>
-            Looks like this plan is empty, search for some food to add to it in
-            the searchbar above.
+            Looks like this plan is empty, search for some food to add to it in the searchbar above.
           </p>
         </div>
       )}
@@ -197,12 +193,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
       )}
       {plan && !planEmpty && (
         <div className="plan">
-          <input
-            type="text"
-            value={title}
-            onChange={titleHandler}
-            maxLength="30"
-          />
+          <input type="text" value={title} onChange={titleHandler} maxLength="30" />
           <div className="nutrition">
             <div className="quickStats">
               <p>QUICK SUMMARY</p>
@@ -250,7 +241,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       onClick={() => deleteHandler(meal, plan.plan.breakfast)}
                     />
                     <img
-                      src={meal.item.food.image}
+                      src={meal.item.food.image ? meal.item.food.image : Food}
                       alt={meal.item.food.label}
                     />
                   </div>
@@ -294,7 +285,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       onClick={() => deleteHandler(meal, plan.plan.lunch)}
                     />
                     <img
-                      src={meal.item.food.image}
+                      src={meal.item.food.image ? meal.item.food.image : Food}
                       alt={meal.item.food.label}
                     />
                   </div>
@@ -313,9 +304,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       onChange={(e) => selectChangeHandler(e, meal)}
                     >
                       {meal.item.measures.map((measurement) => (
-                        <option value={measurement.label}>
-                          {measurement.label}
-                        </option>
+                        <option value={measurement.label}>{measurement.label}</option>
                       ))}
                     </select>
                   </div>
@@ -334,7 +323,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       onClick={() => deleteHandler(meal, plan.plan.dinner)}
                     />
                     <img
-                      src={meal.item.food.image}
+                      src={meal.item.food.image ? meal.item.food.image : Food}
                       alt={meal.item.food.label}
                     />
                   </div>
@@ -353,9 +342,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       onChange={(e) => selectChangeHandler(e, meal)}
                     >
                       {meal.item.measures.map((measurement) => (
-                        <option value={measurement.label}>
-                          {measurement.label}
-                        </option>
+                        <option value={measurement.label}>{measurement.label}</option>
                       ))}
                     </select>
                   </div>

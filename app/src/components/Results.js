@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import Food from "../images/vegetable.png";
+import { useEffect } from 'react';
+import Food from '../images/vegetable.png';
 const Results = ({
   result,
   setDisplayType,
@@ -17,11 +17,11 @@ const Results = ({
   }
 
   const clickHandler = (arrItem) => {
-    setDisplayType("item");
+    setDisplayType('item');
     setDisplayItem(arrItem);
     setResult();
     setSearchBar();
-    setSearchQuery("");
+    setSearchQuery('');
   };
 
   return (
@@ -29,42 +29,28 @@ const Results = ({
       {parsedResult && (
         <div className="mainresult">
           <img src={parsedResult.image} alt="main result" />
-          <p
-            onClick={() => clickHandler(result.data.hints[0])}
-            className={"clickableItemText"}
-          >
+          <p onClick={() => clickHandler(result.data.hints[0])} className={'clickableItemText'}>
             {parsedResult.label}
           </p>
-          <button>+</button>
+          <button onClick={() => clickHandler(result.data.hints[0])}>+</button>
         </div>
       )}
       {hintArray && (
         <div className="hints">
           {hintArray.map((hint) => (
             <div className="hint" key={hintArray.indexOf(hint)}>
-              {
-                <img
-                  src={hint.food.image ? hint.food.image : Food}
-                  alt="hint result"
-                ></img>
-              }
-              <p
-                onClick={() => clickHandler(hint)}
-                className={"clickableItemText"}
-              >
-                {hint.food.label}{" "}
+              {<img src={hint.food.image ? hint.food.image : Food} alt="hint result"></img>}
+              <p onClick={() => clickHandler(hint)} className={'clickableItemText'}>
+                {hint.food.label}{' '}
               </p>
-              <button>+</button>
+              <button onClick={() => clickHandler(hint)}>+</button>
             </div>
           ))}
         </div>
       )}
       {!parsedResult && (
         <div className="refine">
-          <p>
-            Refine your search, e.g: chicken breast, apple, steak or check
-            spelling.
-          </p>
+          <p>Refine your search, e.g: chicken breast, apple, steak or check spelling.</p>
         </div>
       )}
     </div>

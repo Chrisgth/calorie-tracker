@@ -1,15 +1,15 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const planSchema = new Schema(
   {
     userID: {
       type: String,
-      required: [true, "A plan must have a user creating it"],
+      required: [true, 'A plan must have a user creating it'],
     },
     title: {
       type: String,
-      required: [true, "A plan must have a title"],
+      required: [true, 'A plan must have a title'],
     },
     description: {
       type: String,
@@ -26,9 +26,9 @@ const planSchema = new Schema(
       },
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-const Plan = mongoose.model("plan", planSchema);
+const Plan = mongoose.model('plan', planSchema);
 
 module.exports = Plan;

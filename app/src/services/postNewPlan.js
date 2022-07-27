@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const postNewPlan = async (user, config) => {
   const response = await axios.post(
-    "https://chrisgth-calorie-tracker.herokuapp.com/api/tracker/new-plan",
+    'https://chrisgth-calorie-tracker.herokuapp.com/api/tracker/new-plan',
     {
       params: {
-        title: "Meal Plan",
+        title: 'Meal Plan',
         userID: user._id,
       },
     },
-    config
+    config,
   );
   return response;
 };

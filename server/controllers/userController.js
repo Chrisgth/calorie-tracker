@@ -1,27 +1,27 @@
-const bcryptjs = require("bcryptjs");
-const User = require("../models/user.js");
-const asyncHandler = require("express-async-handler");
-const jwt = require("jsonwebtoken");
-const Plan = require("../models/plans.js");
+const bcryptjs = require('bcryptjs');
+const User = require('../models/user.js');
+const asyncHandler = require('express-async-handler');
+const jwt = require('jsonwebtoken');
+const Plan = require('../models/plans.js');
 
 const signup = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
     res.status(400);
-    throw new Error("Please fill out all the fields");
+    throw new Error('Please fill out all the fields');
   }
 
   if (username.length > 15 || password.length > 30) {
     res.status(400);
-    throw new Error("Inputs do not pass validation");
+    throw new Error('Inputs do not pass validation');
   }
 
   const userExists = await User.findOne({ username });
 
   if (userExists) {
     res.status(400);
-    throw new Error("User already exists");
+    throw new Error('User already exists');
   }
 
   const salt = await bcryptjs.genSalt(10);
@@ -34,8 +34,8 @@ const signup = asyncHandler(async (req, res) => {
 
   const defaultPlan = await new Plan({
     userID: user.id,
-    title: "Default plan",
-    description: "",
+    title: 'Default plan',
+    description: '',
     plan: {
       breakfast: [],
       lunch: [],
@@ -78,7 +78,7 @@ const login = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error("Invalid credentials");
+    throw new Error('Invalid credentials');
   }
 });
 const profile = (req, res) => {
@@ -90,7 +90,7 @@ const profile = (req, res) => {
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "7d",
+    expiresIn: '7d',
   });
 };
 

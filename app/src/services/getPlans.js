@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getPlans = async (config) => {
   const response = await axios.get(
-    "https://chrisgth-calorie-tracker.herokuapp.com/api/tracker/get-plans",
-    config
+    'https://chrisgth-calorie-tracker.herokuapp.com/api/tracker/get-plans',
+    config,
   );
   return response;
 };
