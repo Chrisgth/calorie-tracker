@@ -40,7 +40,7 @@ const Signup = ({ setUser }) => {
     setLoading(true);
 
     axios
-      .post('https://chrisgth-calorie-tracker.herokuapp.com/api/user/sign-up', data)
+      .post('https://chrisgth-calorie-tracker.fly.dev/api/user/sign-up', data)
       .then((response) => {
         if (response.status === 201) {
           navigate('/log-in', { replace: true });
