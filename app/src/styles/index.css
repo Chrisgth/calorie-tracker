@@ -31,6 +31,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   width: 100%;
   flex: 1;
@@ -143,15 +144,13 @@ form > div > p,
 .dashboard {
   display: grid;
   min-height: 100%;
-  width: 97%;
+  width: 100%;
   grid-template: 1fr 14fr/ 1fr 4fr;
-  gap: 8px;
   flex: 1;
 }
 
 .dashboard > * {
-  border-radius: 10px;
-  border: 2px solid black;
+  border: 0.5px solid black;
 }
 
 .sidebar {
@@ -166,7 +165,6 @@ form > div > p,
   padding-left: 1rem;
   padding-right: 1rem;
   position: relative;
-  border-radius: 10px 10px 0 0;
 }
 
 .search {
