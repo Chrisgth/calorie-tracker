@@ -40,7 +40,7 @@ const Signup = ({ setUser }) => {
     setLoading(true);
 
     axios
-      .post('https://chrisgth-calorie-tracker.fly.dev/api/user/sign-up', data)
+      .post(`${process.env.REACT_APP_BACKEND_API_URL}/api/user/sign-up`, data)
       .then((response) => {
         if (response.status === 201) {
           navigate('/log-in', { replace: true });

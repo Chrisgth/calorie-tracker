@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const deletePlan = async (plan, config) => {
   const response = await axios.delete(
-    `https://chrisgth-calorie-tracker.fly.dev/api/tracker/delete-plan/${plan._id}`,
+    `${process.env.REACT_APP_BACKEND_API_URL}/api/tracker/delete-plan/${plan._id}`,
     config,
   );
   return response;

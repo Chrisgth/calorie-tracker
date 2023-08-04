@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const updatePlan = async (plan, config) => {
   const response = await axios.put(
-    'https://chrisgth-calorie-tracker.fly.dev/api/tracker/update-plan',
+    `${process.env.REACT_APP_BACKEND_API_URL}/api/tracker/update-plan`,
     {
       params: {
         plan: plan,
