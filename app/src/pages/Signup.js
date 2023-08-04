@@ -14,29 +14,8 @@ const Signup = ({ setUser }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-  const [data, setData] = useState({
-    username: '',
-    password: '',
-    password2: '',
-  });
 
-  const { username, password, password2 } = data;
-
-  const onChange = (e) => {
-    setData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const clickHandler = (e) => {
-    const form = document.querySelector('.signupform');
-
-    if (form.checkValidity() === false) {
-      form.reportValidity();
-      return;
-    }
-
+  const clickHandler = (data) => {
     setLoading(true);
 
     axios
@@ -59,7 +38,7 @@ const Signup = ({ setUser }) => {
       <h2>Sign up</h2>
       {loading && <LoadingSpinner />}
       {loading === false && (
-        <form className="signupform" onSubmit={handleSubmit(clickHandler)}>
+        <form className="signupform" onSubmit={handleSubmit((data) => clickHandler(data))}>
           <div>
             <input
               type="text"
@@ -76,8 +55,6 @@ const Signup = ({ setUser }) => {
                 },
               })}
               placeholder="Username"
-              value={username}
-              onChange={onChange}
               className={`${errors.username ? 'errorborder' : ''}`}
             />
             <p>{errors.username?.message}</p>
@@ -98,8 +75,6 @@ const Signup = ({ setUser }) => {
                 },
               })}
               placeholder="Password"
-              value={password}
-              onChange={onChange}
               className={`${errors.password ? 'errorborder' : ''}`}
             />
             <p>{errors.password?.message}</p>
@@ -113,8 +88,6 @@ const Signup = ({ setUser }) => {
                 validate: (value) => value === watch('password') || 'Passwords do not match',
               })}
               placeholder="Confirm Password"
-              value={password2}
-              onChange={onChange}
               className={`${errors.password2 ? 'errorborder' : ''}`}
             />
             <p>{errors.password2?.message}</p>

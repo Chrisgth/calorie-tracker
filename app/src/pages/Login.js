@@ -1,41 +1,21 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { useForm, useFormState } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/Spinner';
 const axios = require('axios').default;
-
 const Login = ({ setUser }) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+    control,
+  } = useForm({ mode: 'onTouched' });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [data, setData] = useState({
-    username: '',
-    password: '',
-  });
-
-  const { username, password } = data;
-
-  const onChange = (e) => {
-    setData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const clickHandler = (e) => {
-    const form = document.querySelector('.loginform');
-
-    if (form.checkValidity() === false) {
-      form.reportValidity();
-      return;
-    }
-
+  const clickHandler = (data) => {
     setLoading(true);
     axios
       .post(`${process.env.REACT_APP_BACKEND_API_URL}/api/user/log-in`, data)
@@ -58,15 +38,13 @@ const Login = ({ setUser }) => {
       <h3>Please log in</h3>
       {loading && <LoadingSpinner />}
       {loading === false && (
-        <form className="loginform" onSubmit={handleSubmit(clickHandler)}>
+        <form className="loginform" onSubmit={handleSubmit((data) => clickHandler(data))}>
           <div>
             <input
               type="text"
               id="username"
               {...register('username', { required: 'This field is required' })}
               placeholder="Username"
-              value={username}
-              onChange={onChange}
               className={`${errors.username ? 'errorborder' : ''}`}
             />
             <p>{errors.username?.message}</p>
@@ -77,8 +55,6 @@ const Login = ({ setUser }) => {
               id="password"
               {...register('password', { required: 'This field is required' })}
               placeholder="Password"
-              value={password}
-              onChange={onChange}
               className={`${errors.password ? 'errorborder' : ''}`}
             />
             <p>{errors.password?.message}</p>
