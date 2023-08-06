@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/calorie-tracker/static/css/main.a82e066b.css",
-    "main.js": "/calorie-tracker/static/js/main.1f53661a.js",
+    "main.css": "/calorie-tracker/static/css/main.3c8e05ec.css",
+    "main.js": "/calorie-tracker/static/js/main.d428146e.js",
     "index.html": "/calorie-tracker/index.html",
-    "main.a82e066b.css.map": "/calorie-tracker/static/css/main.a82e066b.css.map",
-    "main.1f53661a.js.map": "/calorie-tracker/static/js/main.1f53661a.js.map"
+    "main.3c8e05ec.css.map": "/calorie-tracker/static/css/main.3c8e05ec.css.map",
+    "main.d428146e.js.map": "/calorie-tracker/static/js/main.d428146e.js.map"
   },
   "entrypoints": [
-    "static/css/main.a82e066b.css",
-    "static/js/main.1f53661a.js"
+    "static/css/main.3c8e05ec.css",
+    "static/js/main.d428146e.js"
   ]
 }
