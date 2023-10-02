@@ -6,7 +6,7 @@ A calorie tracker app built using the MERN stack.
   along with their measurements and caloric plus nutritional values.
 - The rest API is built using node and express and hosted on herokuapp. It is protected
   by CORS and can only be accessed from the github pages deployment.
-- Users can register and their information will be stored inside of a MongoDB cluster
+- Users can register/login and their information will be stored inside of a MongoDB cluster
   where the password will be encrypted and decrypted upon login, this was achieved using
   Bcryptjs and JWT.
 - Users can create meal plans in which they can store, update, delete fetched items
