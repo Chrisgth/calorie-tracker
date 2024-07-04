@@ -108,25 +108,14 @@ const Item = ({ displayItem, plans, user, setSelectedPlan, setDisplayType }) => 
       {displayItem && (
         <div className="itemDisplay">
           <h2>{displayItem.food.label}</h2>
-          <div className="itemPeripherals">
+          <div className="itemPeripherals card">
             <img
               src={displayItem.food.image ? displayItem.food.image : Food}
               alt={displayItem.food.label}
             />
-            <div className="measurements">
-              <label htmlFor="amount">Amount:</label>
-              <input type="number" value={input} onChange={inputHandler} />
-              <select name="" id="" value={select} onChange={selectHandler}>
-                {displayItem.measures.map((item) => (
-                  <option value={item.label} key={displayItem.measures.indexOf(item)}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
           <div className="nutrition">
-            <div className="quickStats">
+            <div className="quickStats card">
               <p>QUICK SUMMARY</p>
               <br />
               <div>
@@ -152,7 +141,7 @@ const Item = ({ displayItem, plans, user, setSelectedPlan, setDisplayType }) => 
                 <p>{counter(displayItem.food.nutrients.FIBTG)}g</p>
               </div>
             </div>
-            <div className="chart">
+            <div className="chart card">
               <p>CALORIES FROM</p>
               <div className="pieChart">
                 <Pie height={200} width={200} data={data} />
@@ -160,19 +149,45 @@ const Item = ({ displayItem, plans, user, setSelectedPlan, setDisplayType }) => 
             </div>
           </div>
           {plans.length !== 0 && (
-            <div className="itemSelectors">
-              <select name="plan" id="plan" value={itemSelectedPlan} onChange={planHandler}>
-                {plans.map((plan) => (
-                  <option value={plan._id} key={plans.indexOf(plan)}>
-                    {plan.title}
-                  </option>
-                ))}
-              </select>
-              <select name="meal" id="meal" value={selectedMeal} onChange={mealHandler}>
-                <option value="breakfast">Breakfast</option>
-                <option value="lunch">Lunch</option>
-                <option value="dinner">Dinner</option>
-              </select>
+            <div className="itemSelectors card">
+              <div>
+                <label htmlFor="measurement">Measurement:</label>
+                <select name="measurement" id="measurement" value={select} onChange={selectHandler}>
+                  {displayItem.measures.map((item) => (
+                    <option value={item.label} key={displayItem.measures.indexOf(item)}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="amount">Amount:</label>
+                <input
+                  type="number"
+                  name="amount"
+                  id="amount"
+                  value={input}
+                  onChange={inputHandler}
+                />
+              </div>
+              <div>
+                <label htmlFor="plan">Plan:</label>
+                <select name="plan" id="plan" value={itemSelectedPlan} onChange={planHandler}>
+                  {plans.map((plan) => (
+                    <option value={plan._id} key={plans.indexOf(plan)}>
+                      {plan.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="meal">Meal:</label>
+                <select name="meal" id="meal" value={selectedMeal} onChange={mealHandler}>
+                  <option value="breakfast">Breakfast</option>
+                  <option value="lunch">Lunch</option>
+                  <option value="dinner">Dinner</option>
+                </select>
+              </div>
               <button onClick={addToPlan}>Add to Plan</button>
             </div>
           )}

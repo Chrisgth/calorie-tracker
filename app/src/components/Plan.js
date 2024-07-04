@@ -195,7 +195,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
         <div className="plan">
           <input type="text" value={title} onChange={titleHandler} maxLength="30" />
           <div className="nutrition">
-            <div className="quickStats">
+            <div className="quickStats card">
               <p>QUICK SUMMARY</p>
               <br />
               <div>
@@ -221,7 +221,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                 <p>{fiber} g</p>
               </div>
             </div>
-            <div className="chart">
+            <div className="chart card">
               <p>CALORIES FROM</p>
               <div className="pieChart">
                 <Pie height={300} width={300} data={data} />
@@ -229,7 +229,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
             </div>
           </div>
           <div className="meals">
-            <div className="breakfast">
+            <div className="breakfast card">
               <h3>Breakfast</h3>
               {plan.plan.breakfast.map((meal) => (
                 <div className="meal">
@@ -273,7 +273,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                 </div>
               ))}
             </div>
-            <div className="lunch">
+            <div className="lunch card">
               <h3>Lunch</h3>
               {plan.plan.lunch.map((meal) => (
                 <div className="meal">
@@ -311,7 +311,7 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                 </div>
               ))}
             </div>
-            <div className="dinner">
+            <div className="dinner card">
               <h3>Dinner</h3>
               {plan.plan.dinner.map((meal) => (
                 <div className="meal">

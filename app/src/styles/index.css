@@ -453,6 +453,7 @@ form > div > p,
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 }
 
 .meals > div {
@@ -461,6 +462,7 @@ form > div > p,
 
 .display {
   display: flex;
+  background: #ebebeb;
   flex-direction: column;
   align-items: center;
   overflow: auto;
@@ -470,16 +472,18 @@ form > div > p,
 
 .meal {
   display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
-  background-color: #f7dba7;
+  background-color: #ebebeb;
   padding: 4px;
   margin-top: 4px;
   margin-bottom: 4px;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 4px;
 }
+
+.meal:hover {
+box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.25)}
 
 .mealimgs {
   display: flex;
@@ -521,23 +525,47 @@ form > div > p,
 
 .plan {
   max-width: 100%;
+  gap: 20px;
 }
 
 .plan > input {
-  background-color: #f7dba7;
+  background-color: white;
   font-size: 1rem;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 4px;
   margin-bottom: 1rem;
+  padding: 5px;
 }
 
 .itemSelectors {
   padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.itemSelectors > div  {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.itemSelectors > div > * {
+  padding: 5px;
 }
 
 .measurements > input {
   max-width: 50px;
 }
+
+.card {
+  background: white;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.25);
+}
+
+
 
 @media (max-width: 920px) {
   .dashboard {
