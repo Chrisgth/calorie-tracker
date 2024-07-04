@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 
 export const getFood = async (food) => {
   const response = await axios.get('https://api.edamam.com/api/food-database/v2/parser', {

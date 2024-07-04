@@ -10,7 +10,8 @@ function App() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')));
+    const user = JSON.parse(localStorage.getItem('user'));
+    setUser(user);
   }, []);
 
   useEffect(() => {}, [user]);

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/Spinner';
-const axios = require('axios').default;
+import axios from '../axios';
 const Login = ({ setUser }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);

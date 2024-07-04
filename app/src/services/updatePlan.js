@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 
 export const updatePlan = async (plan, config) => {
   const response = await axios.put(
