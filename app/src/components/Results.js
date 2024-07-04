@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Food from '../images/vegetable.png';
+import ImageWithFallback from './ImageWithFallback';
 const Results = ({
   result,
   setDisplayType,
@@ -28,7 +29,7 @@ const Results = ({
     <div className="results">
       {parsedResult && (
         <div className="mainresult">
-          <img src={parsedResult.image} alt="main result" />
+          <ImageWithFallback src={parsedResult.image} alt="main result" defaultSrc={Food} />
           <p onClick={() => clickHandler(result.data.hints[0])} className={'clickableItemText'}>
             {parsedResult.label}
           </p>
@@ -39,7 +40,13 @@ const Results = ({
         <div className="hints">
           {hintArray.map((hint) => (
             <div className="hint" key={hintArray.indexOf(hint)}>
-              {<img src={hint.food.image ? hint.food.image : Food} alt="hint result"></img>}
+              {
+                <ImageWithFallback
+                  src={hint.food.image ?? Food}
+                  alt="hint result"
+                  defaultSrc={Food}
+                />
+              }
               <p onClick={() => clickHandler(hint)} className={'clickableItemText'}>
                 {hint.food.label}{' '}
               </p>

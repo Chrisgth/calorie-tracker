@@ -4,6 +4,7 @@ import 'chart.js/auto';
 import { updatePlan } from '../services/updatePlan';
 import Close from '../images/close.png';
 import Food from '../images/vegetable.png';
+import ImageWithFallback from './ImageWithFallback';
 
 const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
   const [title, setTitle] = useState(plan.title);
@@ -240,8 +241,9 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       className="deleteMeal"
                       onClick={() => deleteHandler(meal, plan.plan.breakfast)}
                     />
-                    <img
-                      src={meal.item.food.image ? meal.item.food.image : Food}
+                    <ImageWithFallback
+                      src={meal.item.food.image}
+                      defaultSrc={Food}
                       alt={meal.item.food.label}
                     />
                   </div>
@@ -284,8 +286,9 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       className="deleteMeal"
                       onClick={() => deleteHandler(meal, plan.plan.lunch)}
                     />
-                    <img
-                      src={meal.item.food.image ? meal.item.food.image : Food}
+                    <ImageWithFallback
+                      src={meal.item.food.image}
+                      defaultSrc={Food}
                       alt={meal.item.food.label}
                     />
                   </div>
@@ -322,8 +325,9 @@ const Plan = ({ plan, setPlan, plans, setPlans, user }) => {
                       className="deleteMeal"
                       onClick={() => deleteHandler(meal, plan.plan.dinner)}
                     />
-                    <img
-                      src={meal.item.food.image ? meal.item.food.image : Food}
+                    <ImageWithFallback
+                      src={meal.item.food.image}
+                      defaultSrc={Food}
                       alt={meal.item.food.label}
                     />
                   </div>

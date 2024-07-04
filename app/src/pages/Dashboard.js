@@ -53,6 +53,7 @@ const Dashboard = ({ user }) => {
       return;
     } else {
       const searchResult = await getFood(searchQuery);
+      console.log(searchResult);
       setResult(searchResult);
     }
   };

@@ -3,6 +3,7 @@ import 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
 import { updatePlan } from '../services/updatePlan';
 import Food from '../images/vegetable.png';
+import ImageWithFallback from './ImageWithFallback';
 
 const Item = ({ displayItem, plans, user, setSelectedPlan, setDisplayType }) => {
   const [input, setInput] = useState(1);
@@ -109,8 +110,9 @@ const Item = ({ displayItem, plans, user, setSelectedPlan, setDisplayType }) => 
         <div className="itemDisplay">
           <h2>{displayItem.food.label}</h2>
           <div className="itemPeripherals card">
-            <img
-              src={displayItem.food.image ? displayItem.food.image : Food}
+            <ImageWithFallback
+              src={displayItem.food.image}
+              defaultSrc={Food}
               alt={displayItem.food.label}
             />
           </div>
